@@ -133,19 +133,6 @@ ConfigError(){
 		reload
 	}
 	
-	IniRead, x1, Config.ini, Password, xmin
-	IniRead, x2, Config.ini, Password, xmax
-	IniRead, y1, Config.ini, Password, ymin
-	IniRead, y2, Config.ini, Password, ymax
-	if (x1 = "" or x2 = "" or y1 = "" or y2 = "")
-	{
-		Run %A_ScriptDir%\Config.ini
-		GuiControl,,ScriptRed, CONFIG		
-		GuiControl,,State2, ERROR
-		MsgBox, 4112, Config Error, Please enter valid coordinates in the Config for [Password].
-		reload
-	}
-	
 	IniRead, x1, Config.ini, Save & Exit, xmin
 	IniRead, x2, Config.ini, Save & Exit, xmax
 	IniRead, y1, Config.ini, Save & Exit, ymin
