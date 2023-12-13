@@ -672,15 +672,6 @@ if firstrun=2
 }
 return
 
-
-
-
-
-
-
-
-
-
 hell:
 if firstrun=0
 {
