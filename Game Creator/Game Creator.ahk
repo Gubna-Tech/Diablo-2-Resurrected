@@ -36,7 +36,6 @@ WM_LBUTTONDOWN() {
 return
 
 DisableHotkey(disable := true) {
-	Control, Disable,, start
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
@@ -48,7 +47,6 @@ DisableHotkey(disable := true) {
 }
 
 EnableHotkey(enable := true) {
-	Control, Enable,, start
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
@@ -352,14 +350,6 @@ Gui 2: Add, Button, x5 w100 gExit, Exit
 Gui 2: Show,w105 h115, Difficulty
 Gui 2: -caption
 
-IfWinActive, Difficulty
-{
-	hotkey 1, Normal
-	hotkey 2, Nightmare
-	hotkey 3, Hell
-}
-return
-
 normal:
 if firstrun=0
 {
@@ -436,7 +426,7 @@ if firstrun=1
 	sleep 250
 	
 	send %gn% %gamenumber%{tab}
-	
+
 	sleep 250
 	
 	send %pass%
@@ -761,7 +751,7 @@ if firstrun=1
 	sleep 250
 	
 	send %gn% %gamenumber%{tab}
-	
+
 	sleep 250
 	
 	send %pass%
