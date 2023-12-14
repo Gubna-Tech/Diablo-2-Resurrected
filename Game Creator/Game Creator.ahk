@@ -262,6 +262,8 @@ IfWinActive, Coordinates
 	GoSub, close
 Else IfWinActive, Hotkeys
 	GoSub, close2
+Else IfWinActive, Difficulty
+	GoSub, close3
 Else
 	Return
 Return
@@ -339,7 +341,7 @@ exitapp
 
 Difficulty:
 DisableHotkey()
-Gui 1: destroy
+Gui 1: hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 2: Font, s11
 Gui 2: font, bold
@@ -349,6 +351,13 @@ Gui 2: Add, Button, x5 w100 gHell,Hell
 Gui 2: Add, Button, x5 w100 gExit, Exit
 Gui 2: Show,w105 h115, Difficulty
 Gui 2: -caption
+return
+
+Close3:
+Gui 2: Destroy
+Gui 1: Show
+EnableHotkey()
+return
 
 normal:
 if firstrun=0
