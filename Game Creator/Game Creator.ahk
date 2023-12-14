@@ -386,6 +386,8 @@ exitapp
 
 Difficulty:
 DisableHotkey()
+hotkey %hk4%, Exit, on
+
 Gui 1: hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 2: Font, s11
