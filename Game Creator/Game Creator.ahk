@@ -40,9 +40,11 @@ DisableHotkey(disable := true) {
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	Hotkey, %hk1%, off	
 	Hotkey, %hk2%, off
 	Hotkey, %hk3%, off
+	Hotkey, %hk4%, off
 }
 
 EnableHotkey(enable := true) {
@@ -50,9 +52,11 @@ EnableHotkey(enable := true) {
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	Hotkey, %hk1%, on	
 	Hotkey, %hk2%, on
 	Hotkey, %hk3%, on
+	Hotkey, %hk4%, on
 }
 
 DisableHotkey2(disable := true) {
@@ -154,7 +158,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates hotkey|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -277,10 +281,10 @@ sectionList := " ***** Make a Selection ***** "
 
 Loop, Parse, allContents, `n
 {
-    currentSection := A_LoopField
-
-    if !InStr(excludedSections, "|" currentSection "|")
-        sectionList .= "|" currentSection
+	currentSection := A_LoopField
+	
+	if !InStr(excludedSections, "|" currentSection "|")
+		sectionList .= "|" currentSection
 }
 
 Gui, 4: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged2, % sectionList
@@ -302,7 +306,9 @@ DropDownChanged2:
 GuiControlGet, selectedSection,, SectionList
 
 if (selectedSection != " ***** Make a Selection ***** ") {
-    GoSub, ButtonClicked2
+	IniRead, existingHotkey, Config.ini, %selectedSection%, Hotkey
+	GuiControl,, ChosenHotkey, %existingHotkey%
+	GoSub, ButtonClicked2
 }
 
 return
@@ -345,6 +351,13 @@ Gui 2: Add, Button, x5 w100 gHell,Hell
 Gui 2: Add, Button, x5 w100 gExit, Exit
 Gui 2: Show,w105 h115, Difficulty
 Gui 2: -caption
+
+IfWinActive, Difficulty
+{
+	hotkey 1, Normal
+	hotkey 2, Nightmare
+	hotkey 3, Hell
+}
 return
 
 normal:
