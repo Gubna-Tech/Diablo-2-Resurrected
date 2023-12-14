@@ -384,12 +384,11 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
-	Gui 3: font, cBlack
-	Gui 3: Add, Text, x5 Center w210 vTotalGames
-	Gui 3: Show, x0 y0 w225 h125, Normal
+	Gui 3: Show, x0 y0 w225 h100, Normal
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
+	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
 	if (gn = "" or gn = 0)
 	{
@@ -397,18 +396,17 @@ if firstrun=0
 		return
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
-	++runcount
-	Gui 3: font, cBlack
-	GuiControl 3: Font, GameName
+	
 	GuiControl 3: , GameName,%gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
 	
 	return
 }
 if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
-	GuiControl, 3: , gNormal, Create Next Lobby
+	
+	Gui 3: font, cBlack
+	GuiControl 3: Font, GameName
 	
 	++firstrun
 	
@@ -434,8 +432,24 @@ if firstrun=1
 	
 	sleep 250
 	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
+	
+	sleep 250
+	
 	send %gn% %gamenumber%{tab}
-
+	
+	sleep 250
+	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
+	
 	sleep 250
 	
 	send %pass%
@@ -492,16 +506,6 @@ if firstrun=2
 	Random, y, %y1%, %y2%
 	Click, %x%, %y%
 	
-	send ^{a}
-	
-	sleep 100
-	
-	send {delete}
-	
-	sleep 250
-	
-	send %gn% %gamenumber%{tab}
-	
 	sleep 250
 	
 	send ^{a}
@@ -512,11 +516,7 @@ if firstrun=2
 	
 	sleep 250
 	
-	send %pass%
-	
-	sleep 250
-	
-	send {enter}
+	send %gn% %gamenumber%{enter}
 	
 	return
 }
@@ -547,12 +547,11 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
-	Gui 3: font, cBlack
-	Gui 3: Add, Text, x5 Center w210 vTotalGames
-	Gui 3: Show, x0 y0 w225 h125, Nightmare
+	Gui 3: Show, x0 y0 w225 h100, Nightmare
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
+	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
 	if (gn = "" or gn = 0)
 	{
@@ -560,17 +559,17 @@ if firstrun=0
 		return
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
-	++runcount
-	Gui 3: font, cBlack
-	GuiControl 3: Font, GameName
+	
 	GuiControl 3: , GameName,%gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
 	
 	return	
 }
 if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
+	
+	Gui 3: font, cBlack
+	GuiControl 3: Font, GameName
 	
 	++firstrun
 	
@@ -596,7 +595,23 @@ if firstrun=1
 	
 	sleep 250
 	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
+	
+	sleep 250
+	
 	send %gn% %gamenumber%{tab}
+	
+	sleep 250
+	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
 	
 	sleep 250
 	
@@ -654,16 +669,6 @@ if firstrun=2
 	Random, y, %y1%, %y2%
 	Click, %x%, %y%
 	
-	send ^{a}
-	
-	sleep 100
-	
-	send {delete}
-	
-	sleep 250
-	
-	send %gn% %gamenumber%{tab}
-	
 	sleep 250
 	
 	send ^{a}
@@ -674,11 +679,7 @@ if firstrun=2
 	
 	sleep 250
 	
-	send %pass%
-	
-	sleep 250
-	
-	send {enter}
+	send %gn% %gamenumber%{enter}
 	
 	return
 }
@@ -709,13 +710,12 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
-	Gui 3: font, cBlack
-	Gui 3: Add, Text, x5 Center w210 vTotalGames
-	Gui 3: Show, x0 y0 w225 h125, Hell
+	Gui 3: Show, x0 y0 w225 h100, Hell
 	
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
+	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
 	if (gn = "" or gn = 0)
 	{
@@ -723,17 +723,17 @@ if firstrun=0
 		return
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
-	++runcount
-	Gui 3: font, cBlack
-	GuiControl 3: Font, GameName
+	
 	GuiControl 3: , GameName,%gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
 	
 	return
 }
 if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
+	
+	Gui 3: font, cBlack
+	GuiControl 3: Font, GameName
 	
 	++firstrun
 	
@@ -759,8 +759,24 @@ if firstrun=1
 	
 	sleep 250
 	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
+	
+	sleep 250
+	
 	send %gn% %gamenumber%{tab}
-
+	
+	sleep 250
+	
+	send ^{a}
+	
+	sleep 100
+	
+	send {delete}
+	
 	sleep 250
 	
 	send %pass%
@@ -817,16 +833,6 @@ if firstrun=2
 	Random, y, %y1%, %y2%
 	Click, %x%, %y%
 	
-	send ^{a}
-	
-	sleep 100
-	
-	send {delete}
-	
-	sleep 250
-	
-	send %gn% %gamenumber%{tab}
-	
 	sleep 250
 	
 	send ^{a}
@@ -837,11 +843,7 @@ if firstrun=2
 	
 	sleep 250
 	
-	send %pass%
-	
-	sleep 250
-	
-	send {enter}
+	send %gn% %gamenumber%{enter}
 	
 	return
 }
