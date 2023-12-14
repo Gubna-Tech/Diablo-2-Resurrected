@@ -3,11 +3,14 @@
 SetBatchLines, -1
 
 DetectHiddenWindows, On
+settimer, configcheck, 250
+settimer, guicheck
 
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, value, Config.ini, Transparent, value
 
 Hotkey %hk1%, Difficulty
 Hotkey %hk2%, Coordinates
@@ -26,6 +29,7 @@ Gui 1: Add, Button, x5 w210 gDifficulty, Start Game Creator
 Gui 1: Add, Button, x5 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys 
 Gui 1: Add, Button, x5 w210 gExit, Exit Game Creator
+WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
 
 OnMessage(0x0201, "WM_LBUTTONDOWN")
@@ -33,6 +37,38 @@ WM_LBUTTONDOWN() {
 	If (A_Gui)
 		PostMessage, 0xA1, 2
 }
+return
+
+CheckPOS(){
+	WinGetPos, GUIx, GUIy, GUIw, GUIh, A
+	xmin := GUIx
+	xmax :=GUIw + GUIx
+	ymin :=GUIy
+	ymax :=GUIh + GUIy
+	xadj :=A_ScreenWidth-GUIw
+	yadj :=A_ScreenHeight-GUIh
+	WinGetPos, X, Y,,, A	
+ 	
+	if (xmin<0)
+	{
+		WinMove, A,,0
+	}
+	if (ymin<0)
+	{
+		WinMove, A,,,0
+	}
+	if (xmax>A_ScreenWidth)
+	{
+		WinMove, A,,xadj	
+	}
+	if (ymax>A_ScreenHeight)
+	{
+		WinMove, A,,,yadj
+	}
+}
+
+guicheck:
+checkpos()
 return
 
 DisableHotkey(disable := true) {
@@ -149,6 +185,15 @@ ConfigError(){
 	}
 }
 
+ConfigCheck:
+{
+	IniRead, hk1, Config.ini, Start Hotkey, hotkey
+	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+}
+
+return
 Coordinates:
 Gui 1: Hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
@@ -170,7 +215,7 @@ Loop, Parse, allContents, `n
 
 Gui, 2: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged, % sectionList
 Gui, 2: Add, Button, w230 gClose, Close
-
+WinSet, Transparent, %value%
 Gui, 2: Show, w250 h45 Center, Coordinates
 Gui 2: -Caption
 return
@@ -291,7 +336,7 @@ Gui, 4: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged2, % sectio
 Gui, 4: Add, Text, w230 vHotkeysText, Hotkeys will be displayed here
 Gui, 4: Add, Hotkey, x100 y60 w75 vChosenHotkey gHotkeyChanged Center, ** NONE **
 Gui, 4: Add, Button, x10 y90 w230 gClose2, Close
-
+WinSet, Transparent, %value%
 Gui, 4: Show, w250 h100 Center, Hotkeys
 Gui 4: -Caption
 return
@@ -349,6 +394,7 @@ Gui 2: Add, Button, x5 w100 gNormal, Normal
 Gui 2: Add, Button, x5 w100 gNightmare, Nightmare
 Gui 2: Add, Button, x5 w100 gHell,Hell 
 Gui 2: Add, Button, x5 w100 gExit, Exit
+WinSet, Transparent, %value%
 Gui 2: Show,w105 h115, Difficulty
 Gui 2: -caption
 return
@@ -367,6 +413,7 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Normal
 	Hotkey %hk2%, Reload
@@ -384,7 +431,12 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	WinSet, Transparent, %value%
 	Gui 3: Show, x0 y0 w225 h100, Normal
+	
+	IniRead, x, Config.ini, GUI POS, guix
+	IniRead, y, Config.ini, GUI POS, guiy
+	WinMove A, ,%X%, %y%
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
@@ -536,6 +588,7 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
@@ -553,7 +606,12 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	WinSet, Transparent, %value%
 	Gui 3: Show, x0 y0 w225 h100, Nightmare
+	
+	IniRead, x, Config.ini, GUI POS, guix
+	IniRead, y, Config.ini, GUI POS, guiy
+	WinMove A, ,%X%, %y%
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
@@ -705,6 +763,7 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Hell
 	Hotkey %hk2%, Reload
@@ -722,8 +781,12 @@ if firstrun=0
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	WinSet, Transparent, %value%
 	Gui 3: Show, x0 y0 w225 h100, Hell
 	
+	IniRead, x, Config.ini, GUI POS, guix
+	IniRead, y, Config.ini, GUI POS, guiy
+	WinMove A, ,%X%, %y%
 	
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
