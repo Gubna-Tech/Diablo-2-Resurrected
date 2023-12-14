@@ -475,12 +475,18 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
-	++runcount
 	++gamenumber
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	GuiControl 3: , GameName, %gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
+	
+	send {enter}
+	
+	sleep 250
+	
+	Send Next game will be: %gn% %gamenumber%{enter}
+	
+	sleep 250
 	
 	send {esc}
 	
@@ -638,12 +644,18 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
-	++runcount
 	++gamenumber
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	GuiControl 3: , GameName, %gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
+	
+	send {enter}
+	
+	sleep 250
+	
+	Send Next game will be: %gn% %gamenumber%{enter}
+	
+	sleep 250
 	
 	send {esc}
 	
@@ -802,12 +814,18 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
-	++runcount
 	++gamenumber
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	GuiControl 3: , GameName, %gn% %gamenumber%
-	GuiControl 3: , TotalGames,%runcount%
+	
+	send {enter}
+	
+	sleep 250
+	
+	Send Next game will be: %gn% %gamenumber%{enter}
+	
+	sleep 250
 	
 	send {esc}
 	
