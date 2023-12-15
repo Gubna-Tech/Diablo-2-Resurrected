@@ -1,4 +1,47 @@
-# Game Creator
+# Game Creator Script
+
+This script automates game creation in Diablo II: Resurrected. It allows you to easily create new games with specified settings and coordinates.
+
+## Features
+
+- Start, reload, and exit the script with customizable hotkeys.
+- Set coordinates for different in-game actions.
+- Create games with specified difficulty settings.
+- Configure script settings through a user-friendly GUI.
+
+## Usage
+
+### Hotkeys
+
+- **Start Game Creator:** Configure and start the script. (F9 by default)
+- **Coordinates:** Set coordinates for in-game actions. (F10 by default)
+- **Hotkeys:** Configure hotkeys for the script. (F11 by default)
+- **Exit Game Creator:** Exit the script. (F12 by default)
+
+### Difficulty Settings
+
+Choose between Normal, Nightmare, and Hell difficulty settings to create games with specific configurations.
+
+## Instructions
+
+1. Run the script.
+2. Use the GUI to configure hotkeys and set coordinates.
+3. Start creating games with the specified settings.
+
+## Configuration
+
+The script reads configurations from the `Config.ini` file. Make sure to set valid coordinates and hotkeys.
+Coordinates and Hotkeys can be set through/using the GUI once the script has been started.
+
+## Important Notes
+
+- Make sure Diablo II: Resurrected is opened before using the script.
+- Configure the script before starting the game creation process.
+- Follow the on-screen instructions in the GUI for a seamless experience.
+
+*Note: Customize the script to suit your needs by modifying the `Config.ini` file. Or you can use the GUI to edit the `Config.ini`*
+
+---
 
 This project is a continuation and spiritual successor to the following project:
 
