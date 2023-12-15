@@ -201,7 +201,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -320,7 +320,7 @@ Gui 4: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|Game name|Password|Create Game Tab|Save & Exit|Nightmare|Normal|Hell|"
+excludedSections := "|Game name|Password|Create Game Tab|Save & Exit|Nightmare|Normal|Hell|gui pos|transparent|"
 
 sectionList := " ***** Make a Selection ***** "
 
