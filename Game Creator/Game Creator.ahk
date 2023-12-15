@@ -387,6 +387,9 @@ exitapp
 Difficulty:
 DisableHotkey()
 hotkey %hk4%, Exit, on
+hotkey 1, normal
+hotkey 2, nightmare
+hotkey 3, hell
 
 Gui 1: hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
@@ -412,6 +415,11 @@ if firstrun=0
 {
 	EnableHotkey()
 	DisableHotkey2()
+	
+	hotkey 1, normal, off
+	hotkey 2, nightmare, off
+	hotkey 3, hell, off
+	
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
@@ -586,7 +594,12 @@ nightmare:
 if firstrun=0
 {
 	EnableHotkey()
-	DisableHotkey2()
+	DisableHotkey2()	
+	
+	hotkey 1, normal, off
+	hotkey 2, nightmare, off
+	hotkey 3, hell, off
+	
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
@@ -762,6 +775,11 @@ if firstrun=0
 {
 	EnableHotkey()
 	DisableHotkey2()
+	
+	hotkey 1, normal, off
+	hotkey 2, nightmare, off
+	hotkey 3, hell, off
+	
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
