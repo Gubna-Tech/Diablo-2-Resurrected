@@ -5,6 +5,9 @@
 
 # Diablo-2-Resurrected
 
+# Important Note for Script Use
+### *Please be aware that you do not need to make changes to the script itself, only to the Config files that have been provided.*
+
 ## Requirements:
 To run the scripts in this project, you will need to have AutoHotkey (AHK) installed on your system. Please note that all scripts are provided in an uncompiled format, which means you will need AHK installed to execute them.
 
