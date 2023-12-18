@@ -39,31 +39,35 @@ WM_LBUTTONDOWN() {
 }
 return
 
-CheckPOS(){
+CheckPOS() {
+	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|"
+	
+	WinGetTitle, activeWindowTitle, A
+	
+	if (InStr(allowedWindows, "|" activeWindowTitle "|") <= 0) {
+		return
+	}
+	
 	WinGetPos, GUIx, GUIy, GUIw, GUIh, A
 	xmin := GUIx
-	xmax :=GUIw + GUIx
-	ymin :=GUIy
-	ymax :=GUIh + GUIy
-	xadj :=A_ScreenWidth-GUIw
-	yadj :=A_ScreenHeight-GUIh
-	WinGetPos, X, Y,,, A	
- 	
-	if (xmin<0)
-	{
-		WinMove, A,,0
+	xmax := GUIw + GUIx
+	ymin := GUIy
+	ymax := GUIh + GUIy
+	xadj := A_ScreenWidth - GUIw
+	yadj := A_ScreenHeight - GUIh
+	WinGetPos, X, Y,,, A    
+	
+	if (xmin < 0) {
+		WinMove, A,, 0
 	}
-	if (ymin<0)
-	{
-		WinMove, A,,,0
+	if (ymin < 0) {
+		WinMove, A,,, 0
 	}
-	if (xmax>A_ScreenWidth)
-	{
-		WinMove, A,,xadj	
+	if (xmax > A_ScreenWidth) {
+		WinMove, A,, xadj    
 	}
-	if (ymax>A_ScreenHeight)
-	{
-		WinMove, A,,,yadj
+	if (ymax > A_ScreenHeight) {
+		WinMove, A,,, yadj
 	}
 }
 
