@@ -8,7 +8,7 @@ settimer, guicheck
 
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 IniRead, value, Config.ini, Transparent, value
 
@@ -76,7 +76,7 @@ CheckPOS() {
 	DisableHotkey(disable := true) {
 		IniRead, hk1, Config.ini, Start Hotkey, hotkey
 		IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-		IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+		IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 		IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 		Hotkey, %hk1%, off	
 		Hotkey, %hk2%, off
@@ -87,24 +87,12 @@ CheckPOS() {
 	EnableHotkey(enable := true) {
 		IniRead, hk1, Config.ini, Start Hotkey, hotkey
 		IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-		IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+		IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 		IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 		Hotkey, %hk1%, on	
 		Hotkey, %hk2%, on
 		Hotkey, %hk3%, on
 		Hotkey, %hk4%, on
-	}
-	
-	DisableHotkey2(disable := true) {
-		Control, Disable,, start
-		IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-		Hotkey, %hk3%, off
-	}
-	
-	EnableHotkey2(enable := true) {
-		Control, Enable,, start
-		IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-		Hotkey, %hk3%, on
 	}
 	
 	ConfigError(){		
@@ -139,7 +127,7 @@ CheckPOS() {
 	{
 		IniRead, hk1, Config.ini, Start Hotkey, hotkey
 		IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-		IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+		IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 		IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	}
 	
@@ -151,7 +139,7 @@ CheckPOS() {
 	DisableHotkey()
 	
 	IniRead, allContents, Config.ini
-	excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|"
+	excludedSections := "|start hotkey|exit hotkey|hotkey/retry hotkey|coordinates/reload hotkey|gui pos|transparent|"
 	
 	sectionList := " ***** Make a Selection ***** "
 	
@@ -321,83 +309,105 @@ CheckPOS() {
 		Tooltip, Hotkey has been updated in the config file., %xm%+15, %ym%+15, 1
 		Sleep, 25
 		EnableHotkey()
-	}
-	Tooltip
-	return
+}
+Tooltip
+return
+
+Reload:
+reload
+
+Exit:
+guiclose:
+exitapp
+
+Retry:
+WinActivate, Diablo II: Resurrected
+
+sleep 250
+
+CoordMode, Mouse, Screen
+IniRead, x1, Config.ini, Game Name, xmin
+IniRead, x2, Config.ini, Game Name, xmax
+IniRead, y1, Config.ini, Game Name, ymin
+IniRead, y2, Config.ini, Game Name, ymax
+Random, x, %x1%, %x2%
+Random, y, %y1%, %y2%
+Click, %x%, %y%
+
+sleep 250
+
+send {enter}
+
+return
+
+Follow:
+if firstrun=0
+{
+	EnableHotkey()
 	
-	Reload:
-	reload
+	IniRead, hk1, Config.ini, Start Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
+	IniRead, value, Config.ini, Transparent, value
 	
-	Exit:
-	guiclose:
-	exitapp
+	Hotkey %hk1%, Follow
+	Hotkey %hk2%, Reload
+	Hotkey %hk3%, Retry
+	Hotkey %hk4%, Exit	
 	
-	Follow:
-	if firstrun=0
+	++firstrun	
+	ConfigError()
+	
+	Gui 1: Destroy
+	Gui 2: Destroy
+	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
+	Gui 3: Font, s11
+	Gui 3: font, bold
+	Gui 3: Add, Button, x5 w210 gFollow, Join Next Game
+	Gui 3: Add, Button, x5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x115 y42 w105 gRetry, Retry Joining
+	Gui 3: Add, Button, x5  w210 gExit, Exit Script
+	Gui 3: font, cRed
+	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	WinSet, Transparent, %value%
+	Gui 3: Show, x0 y0 w225 h135, Game Follow
+	
+	IniRead, x, Config.ini, GUI POS, guix
+	IniRead, y, Config.ini, GUI POS, guiy
+	WinMove A, ,%X%, %y%
+	
+	InputBox, GN, Game Name, Please enter the current game/lobby name.`nName should be 11 characters or less.,,300,150
+	
+	if (GN = "" or GN = 0)
 	{
-		EnableHotkey()
-		DisableHotkey2()
-		
-		IniRead, hk1, Config.ini, Start Hotkey, hotkey
-		IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-		IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-		IniRead, value, Config.ini, Transparent, value
-		
-		Hotkey %hk1%, Follow
-		Hotkey %hk2%, Reload
-		Hotkey %hk4%, Exit	
-		
-		++firstrun	
-		ConfigError()
-		
-		Gui 1: Destroy
-		Gui 2: Destroy
-		Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
-		Gui 3: Font, s11
-		Gui 3: font, bold
-		Gui 3: Add, Button, x5 w210 gFollow, Join Next Game
-		Gui 3: Add, Button, x5 w105 gReload, Reload Script
-		Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
-		Gui 3: font, cRed
-		Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
-		WinSet, Transparent, %value%
-		Gui 3: Show, x0 y0 w225 h100, Game Follow
-		
-		IniRead, x, Config.ini, GUI POS, guix
-		IniRead, y, Config.ini, GUI POS, guiy
-		WinMove A, ,%X%, %y%
-		
-		InputBox, GN, Game Name, Please enter the current game/lobby name.`nName should be 11 characters or less.,,300,150
-		
-		if (GN = "" or GN = 0)
-		{
-			MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-			return
-		}
-		
-		RegExMatch(GN, "i)(.*?[^0-9]?)(\d+)$", match)
-		
-		if (ErrorLevel)
-		{
-			MsgBox, 48, Invalid Input, Unable to parse the game name.
-			return
-		}
-		
-		baseName := match1
-		numberPart := match2
-		
-		newNumber := numberPart + 1
-		
-		formattedNumber := Format("{:0" StrLen(numberPart) "}", newNumber)
-		
-		newGameName := baseName . formattedNumber
-		
-		inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
-		
-		GuiControl 3: , GameName,%gn%
-		
+		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
 		return
 	}
+	
+	RegExMatch(GN, "i)(.*?[^0-9]?)(\d+)$", match)
+	
+	if (ErrorLevel)
+	{
+		MsgBox, 48, Invalid Input, Unable to parse the game name.
+		return
+	}
+	
+	baseName := match1
+	numberPart := match2
+	
+	newNumber := numberPart + 1
+	
+	formattedNumber := Format("{:0" StrLen(numberPart) "}", newNumber)
+	
+	newGameName := baseName . formattedNumber
+	
+	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	GuiControl 3: , GameName,%gn%
+	
+	return
+}
 	if firstrun=1
 	{
 		WinActivate, Diablo II: Resurrected
