@@ -464,15 +464,15 @@ if firstrun=0
 	Gui 1: Destroy
 	Gui 2: Destroy
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 13 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-13 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
 		reload
 	}
-	else if (StrLen(GN) >= 14)
+	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 13 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
 		reload
 	}
 	
@@ -649,15 +649,15 @@ if firstrun=0
 	Gui 1: Destroy
 	Gui 2: Destroy
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 13 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-13 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
 		reload
 	}
-	else if (StrLen(GN) >= 14)
+	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 13 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
 		reload
 	}
 	
@@ -832,15 +832,15 @@ if firstrun=0
 	Gui 1: Destroy
 	Gui 2: Destroy
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 13 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-13 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
 		reload
 	}
-	else if (StrLen(GN) >= 14)
+	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 13 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
 		reload
 	}
 	
