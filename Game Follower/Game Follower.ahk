@@ -382,7 +382,13 @@ if firstrun=0
 	if (GN = "" or GN = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
+		reload
+	}
+	
+	if (!RegExMatch(GN, "\d"))
+	{
+		MsgBox, 48, Invalid Input, Game name must contain at least one number.
+		reload
 	}
 	
 	RegExMatch(GN, "i)(.*?[^0-9]?)(\d+)$", match)
