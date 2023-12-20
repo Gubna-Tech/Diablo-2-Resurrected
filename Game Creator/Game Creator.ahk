@@ -29,8 +29,14 @@ Gui 1: Add, Button, x5 w210 gDifficulty, Start Game Creator
 Gui 1: Add, Button, x5 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys 
 Gui 1: Add, Button, x5 w210 gExit, Exit Game Creator
+Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
+
+hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
+   	, uint, 1, int, 0, int, 0, uint, 0x10)
+SendMessage, 0x80, 0, hIcon
+SendMessage, 0x80, 1, hIcon
 
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
