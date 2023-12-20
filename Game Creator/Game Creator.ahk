@@ -456,12 +456,18 @@ if firstrun=0
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
+	else if (StrLen(GN) >= 12)
+	{
+		MsgBox, 48, Invalid Input, Game name should be 11 characters or less.
+		reload
+	}	
+	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
@@ -636,17 +642,23 @@ if firstrun=0
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
+	else if (StrLen(GN) >= 12)
+	{
+		MsgBox, 48, Invalid Input, Game name should be 11 characters or less.
+		reload
+	}	
+	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
-	return	
+	return
 }
 if firstrun=1
 {
@@ -816,12 +828,18 @@ if firstrun=0
 	SetFormat, Float, 03.0
 	gamenumber += 0.0	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
+	else if (StrLen(GN) >= 12)
+	{
+		MsgBox, 48, Invalid Input, Game name should be 11 characters or less.
+		reload
+	}	
+	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
