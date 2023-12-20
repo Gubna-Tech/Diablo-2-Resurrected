@@ -370,15 +370,15 @@ return
 HotkeyChanged:
 IniWrite, %ChosenHotkey%, Config.ini, %selectedSection%, Hotkey
 Gui, 4: Destroy
-Gui, 1: Show
-Loop, 100
+
+Loop, 50
 {
 	MouseGetPos, xm, ym
 	Tooltip, Hotkey has been updated in the config file., %xm%+15, %ym%+15, 1
 	Sleep, 25
-	EnableHotkey()
 }
 Tooltip
+Reload
 return
 
 Reload:
