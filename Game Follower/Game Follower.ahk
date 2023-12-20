@@ -367,6 +367,36 @@ if firstrun=0
 	
 	Gui 1: Destroy
 	Gui 2: Destroy
+	
+	InputBox, GN, Game Name, Please enter the current game/lobby name.`nName should be 15 characters or less.,,300,150
+	
+	if (GN = "")
+	{
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-15 characters in length.
+		reload
+	}
+	else if (StrLen(GN) >= 16)
+	{
+		MsgBox, 48, Name Too Long, Game name should be 15 characters or less.
+		reload
+	}
+	
+	if (!RegExMatch(GN, "\d"))
+	{
+		MsgBox, 48, Missing Game Number, Game name must contain at least one number.
+		reload
+	}
+	
+	RegExMatch(GN, "i)(.*?[^0-9]?)(\d+)$", match)
+	
+	if (ErrorLevel)
+	{
+		MsgBox, 48, Invalid Input, Unable to parse the game name.
+		return
+	}
+	
+	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -383,28 +413,6 @@ if firstrun=0
 	IniRead, y, Config.ini, GUI POS, guiy
 	WinMove A, ,%X%, %y%
 	
-	InputBox, GN, Game Name, Please enter the current game/lobby name.`nName should be 11 characters or less.,,300,150
-	
-	if (GN = "" or GN = 0)
-	{
-		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		reload
-	}
-	
-	if (!RegExMatch(GN, "\d"))
-	{
-		MsgBox, 48, Invalid Input, Game name must contain at least one number.
-		reload
-	}
-	
-	RegExMatch(GN, "i)(.*?[^0-9]?)(\d+)$", match)
-	
-	if (ErrorLevel)
-	{
-		MsgBox, 48, Invalid Input, Unable to parse the game name.
-		return
-	}
-	
 	baseName := match1
 	numberPart := match2
 	
@@ -413,8 +421,6 @@ if firstrun=0
 	formattedNumber := Format("{:0" StrLen(numberPart) "}", newNumber)
 	
 	newGameName := baseName . formattedNumber
-	
-	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn%
 	
