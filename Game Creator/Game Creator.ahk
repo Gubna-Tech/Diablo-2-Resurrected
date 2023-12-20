@@ -198,6 +198,7 @@ ConfigCheck:
 }
 
 return
+
 Coordinates:
 Gui 1: Hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
@@ -205,7 +206,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -459,7 +460,7 @@ if firstrun=0
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
+		reload
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
@@ -639,7 +640,7 @@ if firstrun=0
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
+		reload
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
@@ -819,7 +820,7 @@ if firstrun=0
 	if (gn = "" or gn = 0)
 	{
 		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
+		reload
 	}
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
