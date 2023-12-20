@@ -1003,7 +1003,7 @@ send {enter}
 
 sleep 250
 
-Send TP is Hot{enter}
+Send TP is HOT{enter}
 Return
 
 Safe:
