@@ -348,9 +348,7 @@ return
 
 Follow:
 if firstrun=0
-{
-	EnableHotkey()
-	
+{	
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
@@ -396,6 +394,8 @@ if firstrun=0
 	}
 	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	EnableHotkey()
 	
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
@@ -546,5 +546,18 @@ if firstrun=0
 		send %newGameName%{enter}
 		
 		return
-	}
-	return
+}
+return
+
+!F4::
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected ;*[Game Follower]
+
+IfMsgBox Yes
+{
+	winclose, Diablo II: Resurrected
+}
+    Else
+    {
+        return
+}
+return
