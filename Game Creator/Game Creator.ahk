@@ -462,7 +462,7 @@ if firstrun=0
 	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Nightmare
+	Hotkey %hk1%, Normal
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
 	Hotkey %hkauto%, AutoAttack
@@ -838,7 +838,7 @@ if firstrun=0
 	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Nightmare
+	Hotkey %hk1%, Hell
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
 	Hotkey %hkauto%, AutoAttack
