@@ -502,6 +502,8 @@ if firstrun=0
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
+	WinActivate, Diablo II: Resurrected
+	
 	return
 }
 if firstrun=1
@@ -689,6 +691,8 @@ if firstrun=0
 	WinMove A, ,%X%, %y%
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
+	
+	WinActivate, Diablo II: Resurrected
 	
 	return
 }
@@ -878,6 +882,8 @@ if firstrun=0
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
+	WinActivate, Diablo II: Resurrected
+	
 	return
 }
 if firstrun=1
@@ -1033,53 +1039,70 @@ else
 return
 
 CTA:
-IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey	
-IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey	
+settimer, ctatt, Off
+tooltip
+IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
+SetTimer, ctatt, %time%
+
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey    
 
 WinGetPos, WinX, WinY, WinWidth, WinHeight, Diablo II: Resurrected
-mousegetpos, curX, curY
+MouseGetPos, curX, curY
 
 MiddleX := WinX + (WinWidth // 2)
 MiddleY := WinY + (WinHeight // 2)
 
-sleep 50
-send {w down}
-sleep 25
-send {w up}
-sleep 150
+Sleep 50
+Send {w down}
+Sleep 25
+Send {w up}
+Sleep 150
 
-send %hkbc%
-sleep 25
-MouseMove %middlex%,%middley%
-sleep 50
-send {rbutton down}
-sleep 1250
-send {rbutton up}
+Send %hkbc%
+Sleep 25
+MouseMove %MiddleX%, %MiddleY%
+Sleep 50
+Send {rbutton down}
+Sleep 1250
+Send {rbutton up}
 
-send %hkbo%
-sleep 25
-MouseMove %middlex%,%middley%
-sleep 50
-send {rbutton down}
-sleep 1250
-send {rbutton up}
+Send %hkbo%
+Sleep 25
+MouseMove %MiddleX%, %MiddleY%
+Sleep 50
+Send {rbutton down}
+Sleep 1250
+Send {rbutton up}
 
-sleep 450
-send {w down}
-sleep 25
-send {w up}
-MouseMove %curx%,%cury%
+Sleep 450
+Send {w down}
+Sleep 25
+Send {w up}
+MouseMove %curX%, %curY%
+
 return
 
-!F4::
-MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
-
-IfMsgBox Yes
+ctatt:
+Loop 175
 {
-	winclose, Diablo II: Resurrected
+MouseGetPos, xn, yn
+ToolTip, Call to Arms has faded...recast now!!, (xn + 30), (yn + 75), 1
+sleep 25
 }
-    Else
-    {
-        return
-}
+settimer ctatt, off
+tooltip
 return
+	
+	!F4::
+	MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
+	
+	IfMsgBox Yes
+	{
+		winclose, Diablo II: Resurrected
+	}
+	Else
+	{
+        	WinActivate, Diablo II: Resurrected
+	}
+	return
