@@ -444,8 +444,12 @@ return
 
 normal:
 if firstrun=0
-{
+{		
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -464,9 +468,6 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	Gui 1: Destroy
-	Gui 2: Destroy
-	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
@@ -484,7 +485,6 @@ if firstrun=0
 	EnableHotkey()
 	
 	++firstrun	
-	ConfigError()
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -635,8 +635,11 @@ return
 nightmare:
 if firstrun=0
 {
-	EnableHotkey()
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()	
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -655,9 +658,6 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	Gui 1: Destroy
-	Gui 2: Destroy
-	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
@@ -672,8 +672,9 @@ if firstrun=0
 	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
+	EnableHotkey()
+	
 	++firstrun
-	ConfigError()
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -822,8 +823,11 @@ return
 hell:
 if firstrun=0
 {
-	EnableHotkey()
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -842,9 +846,6 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	Gui 1: Destroy
-	Gui 2: Destroy
-	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
@@ -859,8 +860,9 @@ if firstrun=0
 	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
+	EnableHotkey()
+	
 	++firstrun
-	ConfigError()
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
