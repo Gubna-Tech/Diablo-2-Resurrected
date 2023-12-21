@@ -445,7 +445,6 @@ return
 normal:
 if firstrun=0
 {
-	EnableHotkey()
 	DisableHotkey2()
 	
 	hotkey 1, normal, off
@@ -477,6 +476,8 @@ if firstrun=0
 	}
 	
 	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	EnableHotkey()
 	
 	++firstrun	
 	ConfigError()
@@ -1016,3 +1017,16 @@ sleep 250
 
 Send TP is Safe{enter}
 Return
+
+!F4::
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected ;*[Game Follower]
+
+IfMsgBox Yes
+{
+	winclose, Diablo II: Resurrected
+}
+    Else
+    {
+        return
+}
+return
