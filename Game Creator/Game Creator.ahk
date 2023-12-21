@@ -429,7 +429,7 @@ Gui 2: Font, s11
 Gui 2: font, bold
 Gui 2: Add, Button, x5 w100 gNormal, Normal
 Gui 2: Add, Button, x5 w100 gNightmare, Nightmare
-Gui 2: Add, Button, x5 w100 gHell,Hell 
+Gui 2: Add, Button, x5 w100 gHell, Hell 
 Gui 2: Add, Button, x5 w100 gExit, Exit
 WinSet, Transparent, %value%
 Gui 2: Show,w105 h115, Difficulty
@@ -499,8 +499,6 @@ if firstrun=0
 	IniRead, x, Config.ini, GUI POS, guix
 	IniRead, y, Config.ini, GUI POS, guiy
 	WinMove A, ,%X%, %y%
-	
-	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
