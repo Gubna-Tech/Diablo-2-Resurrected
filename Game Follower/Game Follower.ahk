@@ -348,7 +348,10 @@ return
 
 Follow:
 if firstrun=0
-{	
+{		
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
@@ -362,9 +365,7 @@ if firstrun=0
 	
 	++firstrun	
 	ConfigError()
-	
-	Gui 1: Destroy
-	Gui 2: Destroy
+	DisableHotkey()
 	
 	InputBox, GN, Game Name, Please enter the current game/lobby name.`nName should be 15 characters or less.,,300,150
 	
