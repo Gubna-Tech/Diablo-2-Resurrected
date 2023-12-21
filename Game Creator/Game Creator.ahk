@@ -233,7 +233,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -454,11 +454,15 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Normal
+	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
-	Hotkey %hk4%, Exit	
+	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
 	
 	Gui 1: Destroy
 	Gui 2: Destroy
@@ -641,11 +645,15 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
 	
 	Gui 1: Destroy
 	Gui 2: Destroy
@@ -824,11 +832,15 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Hell
+	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
-	Hotkey %hk4%, Exit	
+	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
 	
 	Gui 1: Destroy
 	Gui 2: Destroy
@@ -996,30 +1008,71 @@ return
 
 Up:
 send {enter}
-
 sleep 250
-
 Send TP is Up{enter}
 Return
 
 Hot:
 send {enter}
-
 sleep 250
-
 Send TP is HOT{enter}
 Return
 
 Safe:
 send {enter}
-
 sleep 250
-
 Send TP is Safe{enter}
 Return
 
+AutoAttack:
+toggle	:= !toggle
+if (toggle = 1)
+	SendInput, {RButton Down}
+else
+	SendInput, {RButton Up}
+return
+
+CTA:
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey	
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey	
+
+WinGetPos, WinX, WinY, WinWidth, WinHeight, Diablo II: Resurrected
+mousegetpos, curX, curY
+
+MiddleX := WinX + (WinWidth // 2)
+MiddleY := WinY + (WinHeight // 2)
+
+sleep 50
+send {w down}
+sleep 25
+send {w up}
+sleep 150
+
+send %hkbc%
+sleep 25
+MouseMove %middlex%,%middley%
+sleep 50
+send {rbutton down}
+sleep 1250
+send {rbutton up}
+
+send %hkbo%
+sleep 25
+MouseMove %middlex%,%middley%
+sleep 50
+send {rbutton down}
+sleep 1250
+send {rbutton up}
+
+sleep 450
+send {w down}
+sleep 25
+send {w up}
+MouseMove %curx%,%cury%
+return
+
 !F4::
-MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected ;*[Game Follower]
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
 
 IfMsgBox Yes
 {
