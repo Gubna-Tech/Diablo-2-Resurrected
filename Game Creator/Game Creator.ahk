@@ -3,23 +3,33 @@
 SetBatchLines, -1
 
 DetectHiddenWindows, On
+
 settimer, configcheck, 250
 settimer, guicheck
+
+SetNumLockState, On
 
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 IniRead, value, Config.ini, Transparent, value
 
 Hotkey %hk1%, Difficulty
 Hotkey %hk2%, Coordinates
 Hotkey %hk3%, Config
 Hotkey %hk4%, Exit
+Hotkey %hktp1%, Up
+Hotkey %hktp2%, Hot
+Hotkey %hktp3%, Safe
 
 FirstRun=0
 RunCount=0
 GameNumber=1
+
 
 Gui 1: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 1: Font, s11
@@ -36,7 +46,6 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
-
 
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
@@ -86,10 +95,16 @@ DisableHotkey(disable := true) {
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 	Hotkey, %hk1%, off	
 	Hotkey, %hk2%, off
 	Hotkey, %hk3%, off
 	Hotkey, %hk4%, off
+	Hotkey %hktp1%, off
+	Hotkey %hktp2%, off
+	Hotkey %hktp3%, off
 }
 
 EnableHotkey(enable := true) {
@@ -97,10 +112,16 @@ EnableHotkey(enable := true) {
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 	Hotkey, %hk1%, on	
 	Hotkey, %hk2%, on
 	Hotkey, %hk3%, on
 	Hotkey, %hk4%, on
+	Hotkey %hktp1%, on
+	Hotkey %hktp2%, on
+	Hotkey %hktp3%, on
 }
 
 DisableHotkey2(disable := true) {
@@ -204,6 +225,7 @@ ConfigCheck:
 }
 
 return
+
 Coordinates:
 Gui 1: Hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
@@ -211,7 +233,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -376,13 +398,15 @@ return
 HotkeyChanged:
 IniWrite, %ChosenHotkey%, Config.ini, %selectedSection%, Hotkey
 Gui, 4: Destroy
+
 Loop, 50
 {
 	MouseGetPos, xm, ym
 	Tooltip, Hotkey has been updated in the config file., %xm%+15, %ym%+15, 1
 	Sleep, 25
 }
-reload
+Tooltip
+Reload
 return
 
 Reload:
@@ -420,9 +444,12 @@ return
 
 normal:
 if firstrun=0
-{
-	EnableHotkey()
+{		
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -431,16 +458,33 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Normal
+	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
-	Hotkey %hk4%, Exit	
+	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
+	
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	if (gn = "")
+	{
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		reload
+	}
+	else if (StrLen(GN) >= 13)
+	{
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		reload
+	}
+	
+	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	EnableHotkey()
 	
 	++firstrun	
-	ConfigError()
-	Gui 1: Destroy
-	Gui 2: Destroy
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -455,17 +499,6 @@ if firstrun=0
 	IniRead, x, Config.ini, GUI POS, guix
 	IniRead, y, Config.ini, GUI POS, guiy
 	WinMove A, ,%X%, %y%
-	
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
-	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
-	if (gn = "" or gn = 0)
-	{
-		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
-	}
-	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
@@ -546,8 +579,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	++gamenumber
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
+
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
@@ -601,8 +633,11 @@ return
 nightmare:
 if firstrun=0
 {
-	EnableHotkey()
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()	
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -611,16 +646,33 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
+	
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	if (gn = "")
+	{
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		reload
+	}
+	else if (StrLen(GN) >= 13)
+	{
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		reload
+	}
+	
+	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	EnableHotkey()
 	
 	++firstrun
-	ConfigError()
-	Gui 1: Destroy
-	Gui 2: Destroy
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -636,20 +688,9 @@ if firstrun=0
 	IniRead, y, Config.ini, GUI POS, guiy
 	WinMove A, ,%X%, %y%
 	
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
-	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
-	if (gn = "" or gn = 0)
-	{
-		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
-	}
-	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
-	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
-	return	
+	return
 }
 if firstrun=1
 {
@@ -726,8 +767,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	++gamenumber
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
+
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
@@ -781,8 +821,11 @@ return
 hell:
 if firstrun=0
 {
-	EnableHotkey()
+	Gui 1: Destroy
+	Gui 2: Destroy
+	
 	DisableHotkey2()
+	ConfigError()
 	
 	hotkey 1, normal, off
 	hotkey 2, nightmare, off
@@ -791,16 +834,33 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
 	IniRead, value, Config.ini, Transparent, value
 	
-	Hotkey %hk1%, Hell
+	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
+	Hotkey %hkauto%, AutoAttack
+	Hotkey %hkcta%, CTA	
+	
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	if (gn = "")
+	{
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		reload
+	}
+	else if (StrLen(GN) >= 13)
+	{
+		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		reload
+	}
+	
+	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
+	
+	EnableHotkey()
 	
 	++firstrun
-	ConfigError()
-	Gui 1: Destroy
-	Gui 2: Destroy
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
@@ -815,17 +875,6 @@ if firstrun=0
 	IniRead, x, Config.ini, GUI POS, guix
 	IniRead, y, Config.ini, GUI POS, guiy
 	WinMove A, ,%X%, %y%
-	
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
-	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.,,300,150
-	if (gn = "" or gn = 0)
-	{
-		MsgBox, 48, Invalid Input, Please enter a valid game name between 1-11 characters in length.
-		return
-	}
-	inputbox, Pass,Password,Please enter your lobby password.`nLeave blank for no password.,,300,150
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
@@ -906,8 +955,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	++gamenumber
-	SetFormat, Float, 03.0
-	gamenumber += 0.0	
+
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
@@ -955,5 +1003,83 @@ if firstrun=2
 	send %gn% %gamenumber%{enter}
 	
 	return
+}
+return
+
+Up:
+send {enter}
+sleep 250
+Send TP is Up{enter}
+Return
+
+Hot:
+send {enter}
+sleep 250
+Send TP is HOT{enter}
+Return
+
+Safe:
+send {enter}
+sleep 250
+Send TP is Safe{enter}
+Return
+
+AutoAttack:
+toggle	:= !toggle
+if (toggle = 1)
+	SendInput, {RButton Down}
+else
+	SendInput, {RButton Up}
+return
+
+CTA:
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey	
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey	
+
+WinGetPos, WinX, WinY, WinWidth, WinHeight, Diablo II: Resurrected
+mousegetpos, curX, curY
+
+MiddleX := WinX + (WinWidth // 2)
+MiddleY := WinY + (WinHeight // 2)
+
+sleep 50
+send {w down}
+sleep 25
+send {w up}
+sleep 150
+
+send %hkbc%
+sleep 25
+MouseMove %middlex%,%middley%
+sleep 50
+send {rbutton down}
+sleep 1250
+send {rbutton up}
+
+send %hkbo%
+sleep 25
+MouseMove %middlex%,%middley%
+sleep 50
+send {rbutton down}
+sleep 1250
+send {rbutton up}
+
+sleep 450
+send {w down}
+sleep 25
+send {w up}
+MouseMove %curx%,%cury%
+return
+
+!F4::
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
+
+IfMsgBox Yes
+{
+	winclose, Diablo II: Resurrected
+}
+    Else
+    {
+        return
 }
 return
