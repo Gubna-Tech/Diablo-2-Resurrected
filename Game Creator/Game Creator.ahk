@@ -509,6 +509,8 @@ if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer, ctatt, Off
+	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
 	
@@ -701,6 +703,8 @@ if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer, ctatt, Off
+	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
 	
@@ -892,6 +896,8 @@ if firstrun=0
 if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
+	
+	settimer, ctatt, Off
 	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
