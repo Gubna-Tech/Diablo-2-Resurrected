@@ -579,8 +579,10 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctatt, off
+	
 	++gamenumber
-
+	
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
@@ -769,8 +771,10 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctatt, off
+	
 	++gamenumber
-
+	
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
@@ -959,8 +963,10 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctatt, off
+	
 	++gamenumber
-
+	
 	GuiControl 3: , GameName, %gn% %gamenumber%
 	
 	send {enter}
