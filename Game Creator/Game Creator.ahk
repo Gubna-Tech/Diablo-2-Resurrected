@@ -30,7 +30,6 @@ FirstRun=0
 RunCount=0
 GameNumber=1
 
-
 Gui 1: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 1: Font, s11
 Gui 1: font, bold
@@ -1039,8 +1038,9 @@ else
 return
 
 CTA:
+Gui 10: destroy
 settimer, ctatt, Off
-tooltip
+
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
 SetTimer, ctatt, %time%
 
@@ -1084,21 +1084,35 @@ MouseMove %curX%, %curY%
 return
 
 ctatt:
-Loop 175
+Loop 3
 {
-MouseGetPos, xn, yn
-ToolTip, Call to Arms has faded...recast now!!, (xn + 30), (yn + 75), 1
-sleep 25
+	Gui 10: +AlwaysOnTop
+	Gui 10: Color, Red
+	Gui 10: Font, s16 bold
+	Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
+	Gui 10: -caption
+	Gui 10: Show, xcenter y5 w410 h45
+	Sleep, 1000
+	Gui 10: destroy
+
+	Gui 10: +AlwaysOnTop
+	Gui 10: Color, white
+	Gui 10: Font, cRed
+	Gui 10: Font, s16 bold
+	Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
+	Gui 10:-caption
+	Gui 10: Show, xcenter y5 w410 h45
+	Sleep, 1000
+	Gui 10: destroy
 }
 settimer ctatt, off
-tooltip
 return
-	
-	!F4::
-	MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
-	
-	IfMsgBox Yes
-	{
+
+!F4::
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
+
+IfMsgBox Yes
+{
 		winclose, Diablo II: Resurrected
 	}
 	Else
