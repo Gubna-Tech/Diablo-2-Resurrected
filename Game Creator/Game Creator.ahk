@@ -510,6 +510,7 @@ if firstrun=1
 	WinActivate, Diablo II: Resurrected
 	
 	settimer, ctatt, Off
+	Gui 10: destroy
 	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
@@ -582,6 +583,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	settimer ctatt, off
+	Gui 10: destroy
 	
 	++gamenumber
 	
@@ -704,6 +706,7 @@ if firstrun=1
 	WinActivate, Diablo II: Resurrected
 	
 	settimer, ctatt, Off
+	Gui 10: destroy
 	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
@@ -776,6 +779,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	settimer ctatt, off
+	Gui 10: destroy
 	
 	++gamenumber
 	
@@ -898,6 +902,7 @@ if firstrun=1
 	WinActivate, Diablo II: Resurrected
 	
 	settimer, ctatt, Off
+	Gui 10: destroy
 	
 	Gui 3: font, cBlack
 	GuiControl 3: Font, GameName
@@ -970,6 +975,7 @@ if firstrun=2
 	WinActivate, Diablo II: Resurrected
 	
 	settimer ctatt, off
+	Gui 10: destroy
 	
 	++gamenumber
 	
@@ -1044,17 +1050,50 @@ Return
 AutoAttack:
 toggle	:= !toggle
 if (toggle = 1)
+{	
+	Gui 7: +AlwaysOnTop
+	Gui 7: Color, Green
+	Gui 7: Font, cWhite
+	Gui 7: Font, s16 bold
+	Gui 7: Add, Text,vMyText , AutoAttack enabled
+	Gui 7: -caption
+	Gui 7: Show, xcenter y5 w235 h45
 	SendInput, {RButton Down}
+}
 else
+{	
+	Gui 7: Destroy
+	Gui 8: +AlwaysOnTop
+	Gui 8: Color, Red
+	Gui 8: Font, cWhite
+	Gui 8: Font, s16 bold
+	Gui 8: Add, Text,vMyText , AutoAttack disabled
+	Gui 8: -caption
+	Gui 8: Show, xcenter y5 w240 h45
 	SendInput, {RButton Up}
+	Sleep 3000
+	Gui 8: Destroy
+}
 return
 
 CTA:
-Gui 10: destroy
-settimer, ctatt, Off
+WinActivate, Diablo II: Resurrected
 
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
 SetTimer, ctatt, %time%
+
+Gui 7: hide
+Gui 10: destroy
+
+Gui 6: +AlwaysOnTop
+Gui 6: Color, Green
+Gui 6: Font, cWhite
+Gui 6: Font, s16 bold
+Gui 6: Add, Text,vMyText , Casting Call to Arms
+Gui 6: -caption
+Gui 6: Show, xcenter y5 w245 h45
+
+WinActivate, Diablo II: Resurrected
 
 IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
 IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey    
@@ -1093,20 +1132,34 @@ Sleep 25
 Send {w up}
 MouseMove %curX%, %curY%
 
+Gui 6: destroy
+
+if (toggle = 1)
+{
+	gui 7: show
+	SendInput, {RButton Down}
+}
 return
 
 ctatt:
-Loop 3
+settimer ctatt, off
+gui 7: hide
+Loop 5
 {
 	Gui 10: +AlwaysOnTop
 	Gui 10: Color, Red
+	Gui 10: Font, cWhite
 	Gui 10: Font, s16 bold
 	Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
 	Gui 10: -caption
 	Gui 10: Show, xcenter y5 w410 h45
-	Sleep, 1000
+	Sleep, 500
 	Gui 10: destroy
-
+	if (toggle = 1)
+	{
+		SendInput, {RButton Down}
+	}
+	
 	Gui 10: +AlwaysOnTop
 	Gui 10: Color, white
 	Gui 10: Font, cRed
@@ -1114,10 +1167,18 @@ Loop 3
 	Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
 	Gui 10:-caption
 	Gui 10: Show, xcenter y5 w410 h45
-	Sleep, 1000
+	Sleep, 500
 	Gui 10: destroy
+	if (toggle = 1)
+	{
+		SendInput, {RButton Down}
+	}
 }
-settimer ctatt, off
+	if (toggle = 1)
+	{
+		gui 7: show
+		SendInput, {RButton Down}
+	}
 return
 
 !F4::
