@@ -27,7 +27,7 @@ Gui 1: font, bold
 Gui 1: Add, Button, x5 w210 gFollow, Start Game Follower
 Gui 1: Add, Button, x5 y42 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys 
-Gui 1: Add, Button, x5 y72 w100 gInfo, Info
+Gui 1: Add, Button, x5 y72 w100 gInfo, Information
 Gui 1: Add, Button, x115 y72 w100 gExit, Exit
 Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
@@ -406,7 +406,7 @@ if firstrun=0
 	Gui 3: Add, Button, x5 y5 w210 gFollow, Join Next Game
 	Gui 3: Add, Button, x5 y42 w100 gReload, Reload
 	Gui 3: Add, Button, x115 y42 w100 gRetry, Retry
-	Gui 3: Add, Button, x5 y72 w100 gInfo, Info
+	Gui 3: Add, Button, x5 y72 w100 gInfo, Information
 	Gui 3: Add, Button, x115 y72 w100 gExit, Exit
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 y102 Center w210 vGameName, *** Game Name Not Set ***
