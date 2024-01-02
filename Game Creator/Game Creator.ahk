@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #Persistent
 SetBatchLines, -1
 
@@ -29,14 +29,16 @@ Hotkey %hktp3%, Safe
 FirstRun=0
 RunCount=0
 GameNumber=1
+info=1
 
 Gui 1: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 1: Font, s11
 Gui 1: font, bold
 Gui 1: Add, Button, x5 w210 gDifficulty, Start Game Creator
-Gui 1: Add, Button, x5 w100 gCoordinates, Coordinates
-Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys 
-Gui 1: Add, Button, x5 w210 gExit, Exit Game Creator
+Gui 1: Add, Button, x5 y42 w100 gCoordinates, Coordinates
+Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys
+Gui 1: Add, Button, x5 y72 w100 gInfo, Info
+Gui 1: Add, Button, x115 y72 w100 gExit, Exit
 Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
@@ -487,8 +489,9 @@ if firstrun=0
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
-	Gui 3: Add, Button, x5 w210 gNormal, Create New Game
-	Gui 3: Add, Button, x5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y5 w105 gNormal, Create Game
+	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
@@ -502,6 +505,8 @@ if firstrun=0
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
 	WinActivate, Diablo II: Resurrected
+	
+	info=3
 	
 	return
 }
@@ -679,15 +684,17 @@ if firstrun=0
 	
 	EnableHotkey()
 	
-	++firstrun
+	++firstrun	
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
-	Gui 3: Add, Button, x5 w210 gNightmare, Create New Game
-	Gui 3: Add, Button, x5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y5 w105 gNightmare, Create Game
+	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	WinSet, Transparent, %value% vGameName, *** Game Name Not Set ***
 	WinSet, Transparent, %value%
 	Gui 3: Show, x0 y0 w225 h100, Nightmare
 	
@@ -698,6 +705,8 @@ if firstrun=0
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
 	WinActivate, Diablo II: Resurrected
+	
+	info=3
 	
 	return
 }
@@ -875,12 +884,13 @@ if firstrun=0
 	
 	EnableHotkey()
 	
-	++firstrun
+	++firstrun	
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
-	Gui 3: Add, Button, x5 w210 gHell, Create New Game
-	Gui 3: Add, Button, x5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y5 w105 gHell, Create Game
+	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
@@ -894,6 +904,8 @@ if firstrun=0
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
 	WinActivate, Diablo II: Resurrected
+	
+	info=3
 	
 	return
 }
@@ -1179,6 +1191,83 @@ Loop 5
 		gui 7: show
 		SendInput, {RButton Down}
 	}
+return
+
+info:
+if (info=1){
+	Gui 1: hide
+	IniRead, hk1, Config.ini, Start Hotkey, hotkey
+	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+	IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+	IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
+	MsgBox, 4160, Information, 
+(
+|| Script Hotkeys ||
+Start: %hk1%
+Coordinates/Reload: %hk2%
+Hotkey: %hk3%
+Exit: %hk4%
+
+|| Chat Hotkeys ||
+TP Up: %hktp1%
+TP Hot: %hktp2%
+TP Safe: %hktp3%
+
+|| Combat Hotkeys ||
+AutoAttack: %hkauto%
+
+CTA Buff: %hkcta%
+Battle Commands: %hkbc%
+Battle Orders: %hkbo%
+
+Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
+)
+	Gui 1: show
+}
+if (info=3){
+	Gui 3: hide
+	IniRead, hk1, Config.ini, Start Hotkey, hotkey
+	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+	IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+	IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
+	MsgBox, 4160, Information, 
+(
+|| Script Hotkeys ||
+Start: %hk1%
+Coordinates/Reload: %hk2%
+Hotkey: %hk3%
+Exit: %hk4%
+
+|| Chat Hotkeys ||
+TP Up: %hktp1%
+TP Hot: %hktp2%
+TP Safe: %hktp3%
+
+|| Combat Hotkeys ||
+AutoAttack: %hkauto%
+
+CTA Buff: %hkcta%
+Battle Commands: %hkbc%
+Battle Orders: %hkbo%
+
+Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
+)
+	Gui 3: Show
+}
 return
 
 !F4::
