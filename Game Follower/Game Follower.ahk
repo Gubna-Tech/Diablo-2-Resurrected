@@ -19,14 +19,16 @@ Hotkey %hk4%, Exit
 
 FirstRun=0
 RunCount=0
+info=1
 
 Gui 1: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 1: Font, s11
 Gui 1: font, bold
 Gui 1: Add, Button, x5 w210 gFollow, Start Game Follower
-Gui 1: Add, Button, x5 w100 gCoordinates, Coordinates
+Gui 1: Add, Button, x5 y42 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys 
-Gui 1: Add, Button, x5 w210 gExit, Exit Game Follower
+Gui 1: Add, Button, x5 y72 w100 gInfo, Info
+Gui 1: Add, Button, x115 y72 w100 gExit, Exit
 Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
@@ -401,14 +403,15 @@ if firstrun=0
 	Gui 3: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui 3: Font, s11
 	Gui 3: font, bold
-	Gui 3: Add, Button, x5 w210 gFollow, Join Next Game
-	Gui 3: Add, Button, x5 w105 gReload, Reload Script
-	Gui 3: Add, Button, x115 y42 w105 gRetry, Retry Joining
-	Gui 3: Add, Button, x5  w210 gExit, Exit Script
+	Gui 3: Add, Button, x5 y5 w210 gFollow, Join Next Game
+	Gui 3: Add, Button, x5 y42 w100 gReload, Reload
+	Gui 3: Add, Button, x115 y42 w100 gRetry, Retry
+	Gui 3: Add, Button, x5 y72 w100 gInfo, Info
+	Gui 3: Add, Button, x115 y72 w100 gExit, Exit
 	Gui 3: font, cRed
-	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
+	Gui 3: Add, Text, x5 y102 Center w210 vGameName, *** Game Name Not Set ***
 	WinSet, Transparent, %value%
-	Gui 3: Show, x0 y0 w225 h135, Game Follow
+	Gui 3: Show, x0 y0 w225 h125, Game Follow
 	
 	IniRead, x, Config.ini, GUI POS, guix
 	IniRead, y, Config.ini, GUI POS, guiy
@@ -424,6 +427,8 @@ if firstrun=0
 	newGameName := baseName . formattedNumber
 	
 	GuiControl 3: , GameName,%gn%
+	
+	info=3
 	
 	return
 }
@@ -550,8 +555,43 @@ if firstrun=0
 }
 return
 
+info:
+IniRead, hk1, Config.ini, Start Hotkey, hotkey
+IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
+IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+if (info=1){
+	Gui 1: hide
+	MsgBox, 4160, Information, 
+(
+|| Script Hotkeys ||
+Start: %hk1%
+Coordinates/Reload: %hk2%
+Hotkey: %hk3%
+Exit: %hk4%
+
+Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
+)
+	Gui 1: show
+}
+if (info=3){
+	Gui 3: hide
+	MsgBox, 4160, Information, 
+(
+|| Script Hotkeys ||
+Start: %hk1%
+Coordinates/Reload: %hk2%
+Hotkey: %hk3%
+Exit: %hk4%
+
+Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
+)
+	Gui 3: Show
+}
+return
+
 !F4::
-MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected ;*[Game Follower]
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
 
 IfMsgBox Yes
 {
