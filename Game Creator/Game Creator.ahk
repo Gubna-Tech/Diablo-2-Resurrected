@@ -1190,23 +1190,23 @@ Loop 5
 	{
 		gui 7: show
 		SendInput, {RButton Down}
-	}
+}
 return
 
-info:
+info:	
+IniRead, hk1, Config.ini, Start Hotkey, hotkey
+IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
 if (info=1){
 	Gui 1: hide
-	IniRead, hk1, Config.ini, Start Hotkey, hotkey
-	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
-	IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
-	IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
 	MsgBox, 4160, Information, 
 (
 || Script Hotkeys ||
@@ -1233,17 +1233,6 @@ Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for suppor
 }
 if (info=3){
 	Gui 3: hide
-	IniRead, hk1, Config.ini, Start Hotkey, hotkey
-	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
-	IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
-	IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
 	MsgBox, 4160, Information, 
 (
 || Script Hotkeys ||
