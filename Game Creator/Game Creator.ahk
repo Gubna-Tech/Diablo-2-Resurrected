@@ -37,7 +37,7 @@ Gui 1: font, bold
 Gui 1: Add, Button, x5 w210 gDifficulty, Start Game Creator
 Gui 1: Add, Button, x5 y42 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys
-Gui 1: Add, Button, x5 y72 w100 gInfo, Info
+Gui 1: Add, Button, x5 y72 w100 gInfo, Information
 Gui 1: Add, Button, x115 y72 w100 gExit, Exit
 Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
@@ -491,7 +491,7 @@ if firstrun=0
 	Gui 3: font, bold
 	Gui 3: Add, Button, x5 y5 w105 gNormal, Create Game
 	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
-	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Information
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
@@ -690,7 +690,7 @@ if firstrun=0
 	Gui 3: font, bold
 	Gui 3: Add, Button, x5 y5 w105 gNightmare, Create Game
 	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
-	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Information
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
@@ -890,7 +890,7 @@ if firstrun=0
 	Gui 3: font, bold
 	Gui 3: Add, Button, x5 y5 w105 gHell, Create Game
 	Gui 3: Add, Button, x115 y5 w105 gReload, Reload Script
-	Gui 3: Add, Button, x5 y42 w105 gInfo, Info
+	Gui 3: Add, Button, x5 y42 w105 gInfo, Information
 	Gui 3: Add, Button, x115 y42 w105 gExit, Exit Script
 	Gui 3: font, cRed
 	Gui 3: Add, Text, x5 Center w210 vGameName, *** Game Name Not Set ***
