@@ -50,6 +50,14 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
 
+SetTitleMatchMode, 2
+
+WinGet, numberOfMainMenus, Count, Main Menu
+
+if (numberOfMainMenus > 1) {
+	WinClose, Main Menu
+} else
+	
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
 	If (A_Gui)
@@ -366,6 +374,13 @@ Else
 Return
 
 Config:
+SetTitleMatchMode, 2
+
+WinGet, numberOfMainMenus, Count, Main Menu
+
+if (numberOfMainMenus > 1) {
+	WinClose, Main Menu
+} else
 Gui 1: Hide
 Gui 4: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 4: Font, s11 Bold
@@ -386,7 +401,7 @@ Loop, Parse, allContents, `n
 
 Gui, 4: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged2, % sectionList
 Gui, 4: Add, Text, w230 vHotkeysText, Hotkeys will be displayed here
-Gui, 4: Add, Hotkey, x100 y60 w75 vChosenHotkey gHotkeyChanged Center, ** NONE **
+Gui, 4: Add, Hotkey, x100 y60 w75 vChosenHotkey gHotkeyChanged, None
 Gui, 4: Add, Button, x10 y90 w230 gClose2, Close
 WinSet, Transparent, %value%
 Gui, 4: Show, w250 h100 Center, Hotkeys
@@ -419,15 +434,15 @@ HotkeyChanged:
 IniWrite, %ChosenHotkey%, Config.ini, %selectedSection%, Hotkey
 Gui, 4: Destroy
 
-Loop, 50
-{
-	MouseGetPos, xm, ym
-	Tooltip, Hotkey has been updated in the config file., %xm%+15, %ym%+15, 1
-	Sleep, 25
-}
-Tooltip
+Gui 13: +AlwaysOnTop +OwnDialogs
+Gui 13: Color, Green
+Gui 13: Font, cWhite
+Gui 13: Font, s16 bold
+Gui 13: Add, Text, vTthree , Hotkey has been updated in the Config.ini file
+Gui 13: -caption
+Gui 13: Show, NoActivate xcenter y5 w495 h45
+Sleep 3000
 Reload
-return
 
 Reload:
 reload
