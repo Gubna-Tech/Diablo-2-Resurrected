@@ -9,6 +9,8 @@ settimer, guicheck
 
 SetNumLockState, On
 
+CloseOtherScript()
+
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
@@ -54,6 +56,17 @@ WM_LBUTTONDOWN() {
 		PostMessage, 0xA1, 2
 }
 return
+
+CloseOtherScript()
+{
+	WinGet, hWndList, List, Main Menu
+	
+	Loop, %hWndList%
+	{
+		hWnd := hWndList%A_Index%
+		WinClose, % "ahk_id " hWnd
+	}
+}
 
 CheckPOS() {
 	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|"
