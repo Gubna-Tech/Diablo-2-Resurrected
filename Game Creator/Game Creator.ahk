@@ -508,15 +508,15 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
 	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 11 characters or less.
 		reload
 	}
 	
@@ -709,15 +709,15 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
 	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 11 characters or less.
 		reload
 	}
 	
@@ -911,15 +911,15 @@ if firstrun=0
 	Hotkey %hkauto%, AutoAttack
 	Hotkey %hkcta%, CTA	
 	
-	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 12 characters or less.`nThere is no need to enter a game number.,,300,160
+	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
 	{
-		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-12 characters in length.
+		MsgBox, 48, Name Too Short, Please enter a valid game name between 1-11 characters in length.
 		reload
 	}
 	else if (StrLen(GN) >= 13)
 	{
-		MsgBox, 48, Name Too Long, Game name should be 12 characters or less.
+		MsgBox, 48, Name Too Long, Game name should be 11 characters or less.
 		reload
 	}
 	
