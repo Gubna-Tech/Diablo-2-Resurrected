@@ -436,7 +436,6 @@ IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
 IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
-IniRead, value, Config.ini, Transparent, value
 
 Hotkey %hk1%, Difficulty
 Hotkey %hk2%, Coordinates
