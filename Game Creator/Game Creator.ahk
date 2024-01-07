@@ -49,14 +49,6 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
-
-SetTitleMatchMode, 2
-
-WinGet, numberOfMainMenus, Count, Main Menu
-
-if (numberOfMainMenus > 1) {
-	WinClose, Main Menu
-} else
 	
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
@@ -374,13 +366,6 @@ Else
 Return
 
 Config:
-SetTitleMatchMode, 2
-
-WinGet, numberOfMainMenus, Count, Main Menu
-
-if (numberOfMainMenus > 1) {
-	WinClose, Main Menu
-} else
 Gui 1: Hide
 Gui 4: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 4: Font, s11 Bold
@@ -441,8 +426,29 @@ Gui 13: Font, s16 bold
 Gui 13: Add, Text, vTthree , Hotkey has been updated in the Config.ini file
 Gui 13: -caption
 Gui 13: Show, NoActivate xcenter y5 w495 h45
+
 Sleep 3000
-Reload
+
+IniRead, hk1, Config.ini, Start Hotkey, hotkey
+IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+IniRead, value, Config.ini, Transparent, value
+
+Hotkey %hk1%, Difficulty
+Hotkey %hk2%, Coordinates
+Hotkey %hk3%, Config
+Hotkey %hk4%, Exit
+Hotkey %hktp1%, Up
+Hotkey %hktp2%, Hot
+Hotkey %hktp3%, Safe
+
+Gui 13: Destroy
+Gui 1: Show
+return
 
 Reload:
 reload
