@@ -1147,7 +1147,9 @@ CTA:
 WinActivate, Diablo II: Resurrected
 
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
-TimerTime := time - 30000
+IniRead, warntime, Config.ini, Call to Arms Buff Hotkey, warning timer
+WarningTime := Floor(warntime / 1000)
+TimerTime := time - warntime
 SetTimer, CTAWarn, %TimerTime%
 SetTimer, ctatt, %time%
 
@@ -1261,7 +1263,7 @@ return
 			Gui 15: Color, Teal
 			Gui 15: Font, cWhite
 			Gui 15: Font, s16 bold
-			Gui 15: Add, Text,vMyText , 30 seconds until Call to Arms fades
+			Gui 15: Add, Text,vMyText , %warningtime% seconds until Call to Arms fades
 			Gui 15: -caption
 			Gui 15: Show, NoActivate xcenter y5 w410 h45
 			Sleep, 3000
