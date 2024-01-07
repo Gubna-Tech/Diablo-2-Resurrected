@@ -45,11 +45,15 @@ Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
 WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
 
+IniRead, x, Config.ini, GUI POS, guix
+IniRead, y, Config.ini, GUI POS, guiy
+WinMove A, ,%X%, %y%
+
 hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
-	
+
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
 	If (A_Gui)
@@ -450,9 +454,15 @@ Gui 1: Show
 return
 
 Reload:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%,  Config.ini, GUI POS, guix
+IniWrite, %GUIyc%,  Config.ini, GUI POS, guiy
 reload
 
 Exit:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%,  Config.ini, GUI POS, guix
+IniWrite, %GUIyc%,  Config.ini, GUI POS, guiy
 guiclose:
 exitapp
 
