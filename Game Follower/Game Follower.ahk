@@ -358,6 +358,7 @@ Hotkey %hk4%, Exit
 
 Gui 13: Destroy
 Gui 1: Show
+EnableHotkey()
 return
 
 Reload:
