@@ -451,6 +451,7 @@ Hotkey %hktp3%, Safe
 
 Gui 13: Destroy
 Gui 1: Show
+EnableHotkey()
 return
 
 Reload:
