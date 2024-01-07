@@ -3,6 +3,12 @@
   <img width="250" height="250" src="https://github.com/Gubna-Tech/RuneScape/blob/main/Assets/Logo/LLARS/AHK%20Logo.png">
 </p>
 
+<p align="center">
+  <a href="https://github.com/Gubna-Tech/Diablo-2-Resurrected/archive/main.zip">
+    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/dfc4550d38ea4c8842aac54e773f75ba3478acef/Assets/Download.png" alt="Download" width="400" height="120">
+  </a>
+</p>
+
 # Diablo-2-Resurrected
 
 # Important Note for Script Use
