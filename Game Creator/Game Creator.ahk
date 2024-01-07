@@ -455,15 +455,15 @@ return
 
 Reload:
 WinGetPos, GUIxc, GUIyc,,,,Information
-IniWrite, %GUIxc%,  Config.ini, GUI POS, guix
-IniWrite, %GUIyc%,  Config.ini, GUI POS, guiy
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 reload
 
 Exit:
-WinGetPos, GUIxc, GUIyc,,,,Information
-IniWrite, %GUIxc%,  Config.ini, GUI POS, guix
-IniWrite, %GUIyc%,  Config.ini, GUI POS, guiy
 guiclose:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 exitapp
 
 Difficulty:
