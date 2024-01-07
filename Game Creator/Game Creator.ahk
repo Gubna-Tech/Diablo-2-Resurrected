@@ -301,9 +301,9 @@ SetTimer, CheckClicks, 10
 
 Gui 11: +AlwaysOnTop +OwnDialogs
 Gui 11: Font, s16 bold
-Gui 11: Add, Text, vTone , Right-click the top-left of the item you need the coordinates for
+Gui 11: Add, Text, vTone center, Right-click the top-left of the item you need the coordinates for
 Gui 11: -caption
-Gui 11: Show, NoActivate xcenter y5 w665 h45
+Gui 11: Show, NoActivate xcenter y5
 
 return
 
@@ -317,9 +317,9 @@ if GetKeyState("RButton", "P")
 		Gui 11: destroy
 		Gui 12: +AlwaysOnTop +OwnDialogs
 		Gui 12: Font, s16 bold
-		Gui 12: Add, Text, vTtwo , Right-click the bottom-right of the item you need the coordinates for
+		Gui 12: Add, Text, vTtwo center, Right-click the bottom-right of the item you need the coordinates for
 		Gui 12: -caption
-		Gui 12: Show, NoActivate xcenter y5 w720 h45	
+		Gui 12: Show, NoActivate xcenter y5
 		
 		xmin := MouseX
 		ymin := MouseY
@@ -332,9 +332,9 @@ if GetKeyState("RButton", "P")
 		Gui 13: Color, Green
 		Gui 13: Font, cWhite
 		Gui 13: Font, s16 bold
-		Gui 13: Add, Text, vTthree , Coordinates have been updated in the Config.ini file
+		Gui 13: Add, Text, vTthree center, Coordinates have been updated in the Config.ini file
 		Gui 13: -caption
-		Gui 13: Show, NoActivate xcenter y5 w565 h45
+		Gui 13: Show, NoActivate xcenter y5
 		
 		xmax := MouseX
 		ymax := MouseY
@@ -427,9 +427,9 @@ Gui 13: +AlwaysOnTop +OwnDialogs
 Gui 13: Color, Green
 Gui 13: Font, cWhite
 Gui 13: Font, s16 bold
-Gui 13: Add, Text, vTthree , Hotkey has been updated in the Config.ini file
+Gui 13: Add, Text, vTthree center, Hotkey has been updated in the Config.ini file
 Gui 13: -caption
-Gui 13: Show, NoActivate xcenter y5 w495 h45
+Gui 13: Show, NoActivate xcenter y5
 
 Sleep 3000
 
@@ -1122,9 +1122,9 @@ if (toggle = 1)
 	Gui 7: Color, Green
 	Gui 7: Font, cWhite
 	Gui 7: Font, s16 bold
-	Gui 7: Add, Text,vMyText , AutoAttack enabled
+	Gui 7: Add, Text,vMyText Center,AutoAttack enabled
 	Gui 7: -caption
-	Gui 7: Show, NoActivate xcenter y5 w235 h45
+	Gui 7: Show, NoActivate xcenter y5
 	SendInput, {RButton Down}
 }
 else
@@ -1134,9 +1134,9 @@ else
 	Gui 8: Color, Red
 	Gui 8: Font, cWhite
 	Gui 8: Font, s16 bold
-	Gui 8: Add, Text,vMyText , AutoAttack disabled
+	Gui 8: Add, Text,vMyText center,AutoAttack disabled
 	Gui 8: -caption
-	Gui 8: Show, NoActivate xcenter y5 w240 h45
+	Gui 8: Show, NoActivate xcenter y5
 	SendInput, {RButton Up}
 	Sleep 3000
 	Gui 8: Destroy
@@ -1161,9 +1161,9 @@ Gui 6: +AlwaysOnTop +OwnDialogs
 Gui 6: Color, Green
 Gui 6: Font, cWhite
 Gui 6: Font, s16 bold
-Gui 6: Add, Text,vMyText , Casting Call to Arms
+Gui 6: Add, Text,vMyText center, Casting Call to Arms
 Gui 6: -caption
-Gui 6: Show, NoActivate xcenter y5 w245 h45
+Gui 6: Show, NoActivate xcenter y5
 
 WinActivate, Diablo II: Resurrected
 
@@ -1223,9 +1223,9 @@ return
 			Gui 10: Color, Red
 			Gui 10: Font, cWhite
 			Gui 10: Font, s16 bold
-			Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
+			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
 			Gui 10: -caption
-			Gui 10: Show, NoActivate xcenter y5 w410 h45
+			Gui 10: Show, NoActivate xcenter y5
 			Sleep, 500
 			Gui 10: destroy
 			WinActivate, Diablo II: Resurrected
@@ -1237,9 +1237,9 @@ return
 			Gui 10: Color, white
 			Gui 10: Font, cRed
 			Gui 10: Font, s16 bold
-			Gui 10: Add, Text,vMyText , Call to Arms has faded...recast now!!
+			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
 			Gui 10:-caption
-			Gui 10: Show, NoActivate xcenter y5 w410 h45
+			Gui 10: Show, NoActivate xcenter y5
 			Sleep, 500
 			Gui 10: destroy
 			WinActivate, Diablo II: Resurrected
@@ -1263,9 +1263,9 @@ return
 			Gui 15: Color, Teal
 			Gui 15: Font, cWhite
 			Gui 15: Font, s16 bold
-			Gui 15: Add, Text,vMyText , %warningtime% seconds until Call to Arms fades
+			Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
 			Gui 15: -caption
-			Gui 15: Show, NoActivate xcenter y5 w410 h45
+			Gui 15: Show, NoActivate xcenter y5
 			Sleep, 3000
 			Gui 15: destroy
 			WinActivate, Diablo II: Resurrected
