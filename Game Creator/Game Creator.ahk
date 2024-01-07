@@ -1141,6 +1141,7 @@ TimerTime := time - 30000
 SetTimer, CTAWarn, %TimerTime%
 SetTimer, ctatt, %time%
 
+Gui 15: hide
 Gui 7: hide
 Gui 10: destroy
 
@@ -1247,7 +1248,7 @@ return
 		gui 7: hide
 			WinActivate, Diablo II: Resurrected
 			Gui 15: +AlwaysOnTop +OwnDialogs
-			Gui 15: Color, Red
+			Gui 15: Color, Teal
 			Gui 15: Font, cWhite
 			Gui 15: Font, s16 bold
 			Gui 15: Add, Text,vMyText , 30 seconds until Call to Arms fades
