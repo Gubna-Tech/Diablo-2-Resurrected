@@ -553,6 +553,7 @@ if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer, ctatt, Off
 	Gui 10: destroy
 	
@@ -626,6 +627,7 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer ctatt, off
 	Gui 10: destroy
 	
@@ -753,6 +755,7 @@ if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer, ctatt, Off
 	Gui 10: destroy
 	
@@ -826,6 +829,7 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer ctatt, off
 	Gui 10: destroy
 	
@@ -952,6 +956,7 @@ if firstrun=1
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer, ctatt, Off
 	Gui 10: destroy
 	
@@ -1025,6 +1030,7 @@ if firstrun=2
 {
 	WinActivate, Diablo II: Resurrected
 	
+	settimer ctawarn, off
 	settimer ctatt, off
 	Gui 10: destroy
 	
@@ -1131,6 +1137,8 @@ CTA:
 WinActivate, Diablo II: Resurrected
 
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
+TimerTime := time - 30000
+SetTimer, CTAWarn, %TimerTime%
 SetTimer, ctatt, %time%
 
 Gui 7: hide
@@ -1234,19 +1242,40 @@ return
 		}
 		return
 		
-	info:	
-	IniRead, hk1, Config.ini, Start Hotkey, hotkey
-	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
-	IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
-	IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
-	if (info=1){
+	ctawarn:
+		settimer ctawarn, off
+		gui 7: hide
+			WinActivate, Diablo II: Resurrected
+			Gui 15: +AlwaysOnTop +OwnDialogs
+			Gui 15: Color, Red
+			Gui 15: Font, cWhite
+			Gui 15: Font, s16 bold
+			Gui 15: Add, Text,vMyText , 30 seconds until Call to Arms fades
+			Gui 15: -caption
+			Gui 15: Show, NoActivate xcenter y5 w410 h45
+			Sleep, 3000
+			Gui 15: destroy
+			WinActivate, Diablo II: Resurrected
+		if (toggle = 1)
+		{
+			gui 7: show
+			SendInput, {RButton Down}
+}
+return
+
+info:	
+IniRead, hk1, Config.ini, Start Hotkey, hotkey
+IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
+IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
+IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
+if (info=1){
 		Gui 1: hide
 		MsgBox, 4160, Information, 
 (
