@@ -4,7 +4,6 @@ SetBatchLines, -1
 
 DetectHiddenWindows, On
 
-settimer, configcheck, 250
 settimer, guicheck
 
 SetNumLockState, On
@@ -233,15 +232,6 @@ ConfigError(){
 		reload
 	}
 }
-
-ConfigCheck:
-{
-	IniRead, hk1, Config.ini, Start Hotkey, hotkey
-	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
-	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-}
-
 return
 
 Coordinates:
