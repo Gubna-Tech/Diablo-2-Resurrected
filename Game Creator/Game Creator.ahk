@@ -14,18 +14,12 @@ IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 IniRead, value, Config.ini, Transparent, value
 
 Hotkey %hk1%, Difficulty
 Hotkey %hk2%, Coordinates
 Hotkey %hk3%, Config
 Hotkey %hk4%, Exit
-Hotkey %hktp1%, Up
-Hotkey %hktp2%, Hot
-Hotkey %hktp3%, Safe
 
 FirstRun=0
 RunCount=0
@@ -113,15 +107,11 @@ DisableHotkey(disable := true) {
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	
 	Hotkey, %hk1%, off	
 	Hotkey, %hk2%, off
 	Hotkey, %hk3%, off
 	Hotkey, %hk4%, off
-	Hotkey %hktp1%, off
-	Hotkey %hktp2%, off
-	Hotkey %hktp3%, off
 }
 
 EnableHotkey(enable := true) {
@@ -130,15 +120,11 @@ EnableHotkey(enable := true) {
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+
 	Hotkey, %hk1%, on	
 	Hotkey, %hk2%, on
 	Hotkey, %hk3%, on
 	Hotkey, %hk4%, on
-	Hotkey %hktp1%, on
-	Hotkey %hktp2%, on
-	Hotkey %hktp3%, on
 }
 
 DisableHotkey2(disable := true) {
@@ -241,7 +227,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|last game message|thank you message|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -499,15 +485,25 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+	IniRead, hkty, Config.ini, Thank You Message, hotkey
+	IniRead, hklg, Config.ini, Last Game Message, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Normal
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
 	Hotkey %hkauto%, AutoAttack
-	Hotkey %hkcta%, CTA	
+	Hotkey %hkcta%, CTA
+	Hotkey, %hkty%,ThankYou
+	Hotkey, %hklg%,LastGame
+	Hotkey %hktp1%, Up
+	Hotkey %hktp2%, Hot
+	Hotkey %hktp3%, Safe
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -700,15 +696,25 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+	IniRead, hkty, Config.ini, Thank You Message, hotkey
+	IniRead, hklg, Config.ini, Last Game Message, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Nightmare
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
 	Hotkey %hkauto%, AutoAttack
-	Hotkey %hkcta%, CTA	
+	Hotkey %hkcta%, CTA
+	Hotkey, %hkty%,ThankYou
+	Hotkey, %hklg%,LastGame
+	Hotkey %hktp1%, Up
+	Hotkey %hktp2%, Hot
+	Hotkey %hktp3%, Safe
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -902,15 +908,25 @@ if firstrun=0
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
-	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
-	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey	
+	IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey
+	IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+	IniRead, hkty, Config.ini, Thank You Message, hotkey
+	IniRead, hklg, Config.ini, Last Game Message, hotkey
+	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
+	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
+	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Hell
 	Hotkey %hk2%, Reload
 	Hotkey %hk4%, Exit
 	Hotkey %hkauto%, AutoAttack
-	Hotkey %hkcta%, CTA	
+	Hotkey %hkcta%, CTA
+	Hotkey, %hkty%,ThankYou
+	Hotkey, %hklg%,LastGame
+	Hotkey %hktp1%, Up
+	Hotkey %hktp2%, Hot
+	Hotkey %hktp3%, Safe
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -1105,6 +1121,20 @@ sleep 250
 Send TP is Safe{enter}
 Return
 
+ThankYou:
+send {enter}
+sleep 250
+iniread, message, Config.ini, Thank You Message, message
+Send %message%{enter}
+Return
+
+LastGame:
+send {enter}
+sleep 250
+iniread, message, Config.ini, Last Game Message, message
+Send %message%{enter}
+Return
+
 AutoAttack:
 toggle	:= !toggle
 if (toggle = 1)
@@ -1275,26 +1305,32 @@ IniRead, hk4, Config.ini, Exit Hotkey, hotkey
 IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
 IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
-IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey	
+IniRead, hkauto, Config.ini, AutoAttack Hotkey, hotkey
 IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
-IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
-IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey  
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
+IniRead, hkty, Config.ini, Thank You Message, hotkey
+IniRead, hklg, Config.ini, Last Game Message, hotkey
+
 if (info=1){
-		Gui 1: hide
-		MsgBox, 4160, Information, 
+	Gui 1: hide
+	MsgBox, 4160, Information, 
 (
-|| Script Hotkeys ||
+[ Script Hotkeys ]
 Start: %hk1%
 Coordinates/Reload: %hk2%
 Hotkey: %hk3%
 Exit: %hk4%
 
-|| Chat Hotkeys ||
+[ Chat Hotkeys ]
 TP Up: %hktp1%
 TP Hot: %hktp2%
 TP Safe: %hktp3%
 
-|| Combat Hotkeys ||
+Thank You: %hkty%
+Last Game: %hklg%
+
+[ Combat Hotkeys ]
 AutoAttack: %hkauto%
 
 CTA Buff: %hkcta%
@@ -1303,24 +1339,27 @@ Battle Orders: %hkbo%
 
 Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
 )
-		Gui 1: show
-	}
+	Gui 1: show
+}
 	if (info=3){
 		Gui 3: hide
 		MsgBox, 4160, Information, 
 (
-|| Script Hotkeys ||
+[ Script Hotkeys ]
 Start: %hk1%
 Coordinates/Reload: %hk2%
 Hotkey: %hk3%
 Exit: %hk4%
 
-|| Chat Hotkeys ||
+[ Chat Hotkeys ]
 TP Up: %hktp1%
 TP Hot: %hktp2%
 TP Safe: %hktp3%
 
-|| Combat Hotkeys ||
+Thank You: %hkty%
+Last Game: %hklg%
+
+[ Combat Hotkeys ]
 AutoAttack: %hkauto%
 
 CTA Buff: %hkcta%
