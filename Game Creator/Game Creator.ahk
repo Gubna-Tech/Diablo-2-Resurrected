@@ -66,7 +66,7 @@ CloseOtherScript()
 }
 
 CheckPOS() {
-	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|"
+	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|difficulty|information|hotkeys|coordinates|"
 	
 	WinGetTitle, activeWindowTitle, A
 	
@@ -106,7 +106,6 @@ DisableHotkey(disable := true) {
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 	
 	Hotkey, %hk1%, off	
 	Hotkey, %hk2%, off
@@ -119,7 +118,6 @@ EnableHotkey(enable := true) {
 	IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 	IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 	IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 
 	Hotkey, %hk1%, on	
 	Hotkey, %hk2%, on
@@ -336,13 +334,23 @@ return
 
 ~Esc::
 IfWinActive, Coordinates
-	GoSub, close
-Else IfWinActive, Hotkeys
-	GoSub, close2
-Else IfWinActive, Difficulty
-	GoSub, close3
-Else
-	Return
+{EnableHotkey()
+GoSub, close
+}
+IfWinActive, Hotkeys
+{EnableHotkey()	
+GoSub, close2
+}
+IfWinActive, Difficulty
+{
+EnableHotkey()
+GoSub, close3
+}
+IfWinActive, Information
+{	
+EnableHotkey()	
+GoSub, CloseInfo
+}
 Return
 
 Config:
@@ -449,6 +457,10 @@ hotkey %hk4%, Exit, on
 hotkey 1, normal
 hotkey 2, nightmare
 hotkey 3, hell
+
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 
 Gui 1: hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
@@ -1297,7 +1309,8 @@ return
 }
 return
 
-info:	
+info:
+DisableHotkey()
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
@@ -1312,75 +1325,57 @@ IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
 IniRead, hkty, Config.ini, Thank You Message, hotkey
 IniRead, hklg, Config.ini, Last Game Message, hotkey
 
-if (info=1){
-	Gui 1: hide
-	MsgBox, 4160, Information, 
-(
-[ Script Hotkeys ]
-Start: %hk1%
-Coordinates/Reload: %hk2%
-Hotkey: %hk3%
-Exit: %hk4%
+Gui 1: hide
+Gui 3: hide	
+Gui 20: +AlwaysOnTop +OwnDialogs
+Gui 20: Font, s11 Bold underline cPurple
+Gui 20: Add, Text, Center w220 x5,[ Script Hotkeys ]
+Gui 20: Font, Norm
+Gui 20: Add, Text, Center w220 x5,Start: %hk1%`nCoordinates/Reload: %hk2%`nHotkey: %hk3%`nExit: %hk4%
+Gui 20: Add, Text, center x5 w220,
+Gui 20: Font, Bold underline cTeal
+Gui 20: Add, Text, Center w220 x5,[Chat Hotkeys]
+Gui 20: Font, Norm
+Gui 20: Add, Text, Center w220 x5,TP Up: %hktp1%`nTP Hot: %hktp2%`nTP Safe: %hktp3%`nThank You: %hkty%`nLast Game: %hklg%
+Gui 20: Add, Text, center x5 w220,
+Gui 20: Font, Bold underline cMaroon
+Gui 20: Add, Text, Center w220 x10,[Combat Hotkeys]
+Gui 20: Font, Norm
+Gui 20: Add, Text, Center w220 x5,AutoAttack: %hkauto%`nCTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBattle Orders: %hkbo%
+Gui 20: Font, s11 Bold c0x152039
+Gui 20: Add, Text, center x5 w220,
+Gui 20: Add, Text, Center w220 x5,Created by Gubna
+Gui 20: Add, Button, gDiscord w150 x40 center,Discord
+Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
+Gui 20: -caption
+Gui 20: Show, center w230, Information
+return
 
-[ Chat Hotkeys ]
-TP Up: %hktp1%
-TP Hot: %hktp2%
-TP Safe: %hktp3%
-
-Thank You: %hkty%
-Last Game: %hklg%
-
-[ Combat Hotkeys ]
-AutoAttack: %hkauto%
-
-CTA Buff: %hkcta%
-Battle Commands: %hkbc%
-Battle Orders: %hkbo%
-
-Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
-)
-	Gui 1: show
+CloseInfo:
+EnableHotkey()
+gui 20: destroy
+if (info=1){		
+	gui 1: show
 }
-	if (info=3){
-		Gui 3: hide
-		MsgBox, 4160, Information, 
-(
-[ Script Hotkeys ]
-Start: %hk1%
-Coordinates/Reload: %hk2%
-Hotkey: %hk3%
-Exit: %hk4%
+if (info=3){
+	gui 3: show
+}			
+return
 
-[ Chat Hotkeys ]
-TP Up: %hktp1%
-TP Hot: %hktp2%
-TP Safe: %hktp3%
+discord:
+Gui 20: destroy
+Run, https://discord.gg/2zRRJbdYff
+return
 
-Thank You: %hkty%
-Last Game: %hklg%
+!F4::
+MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
 
-[ Combat Hotkeys ]
-AutoAttack: %hkauto%
-
-CTA Buff: %hkcta%
-Battle Commands: %hkbc%
-Battle Orders: %hkbo%
-
-Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
-)
-		Gui 3: Show
-	}
-	return
-	
-	!F4::
-	MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
-	
-	IfMsgBox Yes
-	{
-		winclose, Diablo II: Resurrected
-	}
-	Else
-	{
-        	WinActivate, Diablo II: Resurrected
-	}
-	return
+IfMsgBox Yes
+{
+				winclose, Diablo II: Resurrected
+			}
+			Else
+			{
+				WinActivate, Diablo II: Resurrected
+			}
+			return
