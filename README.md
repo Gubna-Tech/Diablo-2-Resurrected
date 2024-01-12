@@ -5,7 +5,12 @@
 
 <p align="center">
   <a href="https://github.com/Gubna-Tech/Diablo-2-Resurrected/archive/main.zip">
-    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/dfc4550d38ea4c8842aac54e773f75ba3478acef/Assets/Download.png" alt="Download" width="400" height="120">
+    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/main/Assets/D2R%20Download.png" alt="Download" width="400" height="120">
+  </a>
+</p>
+<p align="center">
+  <a href="https://discord.gg/2zRRJbdYff">
+    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/main/Assets/D2R%20Discord.png" alt="Download" width="400" height="120">
   </a>
 </p>
 
