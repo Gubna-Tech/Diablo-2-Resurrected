@@ -14,17 +14,8 @@
   </a>
 </p>
 
-# Diablo-2-Resurrected
-
 # Important Note for Script Use
 ### *Please be aware that you do not need to make changes to the script itself, only to the Config files that have been provided.*
-
-
-<div align="center">
-  <h2 style="font-size: 24px;">Discord link for help</h2>
-  <a href="https://discord.gg/2zRRJbdYff" style="font-size: 18px;">D2R Script Support Discord</a>
-</div>
-
 
 ## Requirements:
 To run the scripts in this project, you will need to have AutoHotkey (AHK) installed on your system. Please note that all scripts are provided in an uncompiled format, which means you will need AHK installed to execute them.
