@@ -267,11 +267,18 @@ return
 
 ~Esc::
 IfWinActive, Coordinates
-	GoSub, close
-Else IfWinActive, Hotkeys
-	GoSub, close2
-Else
-	Return
+{EnableHotkey()
+GoSub, close
+}
+IfWinActive, Hotkeys
+{EnableHotkey()	
+GoSub, close2
+}
+IfWinActive, Information
+{	
+EnableHotkey()	
+GoSub, CloseInfo
+}
 Return
 
 Config:
@@ -594,38 +601,42 @@ if firstrun=0
 return
 
 info:
+DisableHotkey()
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-if (info=1){
-	Gui 1: hide
-	MsgBox, 4160, Information, 
-(
-|| Script Hotkeys ||
-Start: %hk1%
-Coordinates/Reload: %hk2%
-Hotkey: %hk3%
-Exit: %hk4%
 
-Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
-)
-	Gui 1: show
+Gui 1: hide
+Gui 3: hide	
+Gui 20: +AlwaysOnTop +OwnDialogs
+Gui 20: Font, s11 Bold underline cPurple
+Gui 20: Add, Text, Center w220 x5,[ Script Hotkeys ]
+Gui 20: Font, Norm
+Gui 20: Add, Text, Center w220 x5,Start: %hk1%`nCoordinates/Reload: %hk2%`nHotkey: %hk3%`nExit: %hk4%
+Gui 20: Font, s11 Bold c0x152039
+Gui 20: Add, Text, center x5 w220,
+Gui 20: Add, Text, Center w220 x5,Created by Gubna
+Gui 20: Add, Button, gDiscord w150 x40 center,Discord
+Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
+Gui 20: -caption
+Gui 20: Show, center w230, Information
+return
+
+CloseInfo:
+EnableHotkey()
+gui 20: destroy
+if (info=1){		
+	gui 1: show
 }
 if (info=3){
-	Gui 3: hide
-	MsgBox, 4160, Information, 
-(
-|| Script Hotkeys ||
-Start: %hk1%
-Coordinates/Reload: %hk2%
-Hotkey: %hk3%
-Exit: %hk4%
+	gui 3: show
+}			
+return
 
-Thank you for using my Diablo II: Resurrected AutoHotKey scripts, and for supporting free and open-source software. Reach out to Gubna on Discord if you are needing help with setup. - Gubna
-)
-	Gui 3: Show
-}
+discord:
+Gui 20: destroy
+Run, https://discord.gg/2zRRJbdYff
 return
 
 !F4::
