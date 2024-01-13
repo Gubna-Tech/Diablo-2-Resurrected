@@ -1351,7 +1351,7 @@ Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,TP Up: %hktp1%`nTP Hot: %hktp2%`nTP Safe: %hktp3%`nThank You: %hkty%`nLast Game: %hklg%
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cMaroon
-Gui 20: Add, Text, Center w220 x10,[Combat Hotkeys]
+Gui 20: Add, Text, Center w220 x5,[Combat Hotkeys]
 Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,AutoAttack: %hkauto%`nCTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBattle Orders: %hkbo%
 Gui 20: Font, s11 Bold c0x152039
