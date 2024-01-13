@@ -5,6 +5,13 @@
 <img width="250" height="250" src="https://github.com/Gubna-Tech/RuneScape/blob/main/Assets/Logo/LLARS/AHK%20Logo.png">
 </p>
 
+<p align="center">
+  <a href="https://discord.gg/2zRRJbdYff">
+    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/2657316a3911f43619406396e39a40fb6449253c/Assets/D2R%20Discord.png" alt="Download" width="400" height="120">
+  </a>
+</p>
+
+
 # Game Follow Script
 
 This script automates follwing games in Diablo II: Resurrected. It allows you to easily join new games with specified settings and coordinates.
