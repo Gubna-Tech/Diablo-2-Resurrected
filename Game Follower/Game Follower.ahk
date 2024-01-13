@@ -148,22 +148,26 @@ CheckPOS() {
 			MsgBox, 4112, Config Error, Please enter valid coordinates in the Config for [Save & Exit].
 			reload
 		}
-	}
-	return
-	
-	Coordinates:
-	Gui 1: Hide
-	Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
-	Gui 2: Font, s11 Bold
-	DisableHotkey()
-	
-	IniRead, allContents, Config.ini
-	excludedSections := "|start hotkey|exit hotkey|hotkey/retry hotkey|coordinates/reload hotkey|gui pos|transparent|"
-	
-	sectionList := " ***** Make a Selection ***** "
-	
-	Loop, Parse, allContents, `n
-	{
+}
+return
+
+Coordinates:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
+
+Gui 1: Hide
+Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
+Gui 2: Font, s11 Bold
+DisableHotkey()
+
+IniRead, allContents, Config.ini
+excludedSections := "|start hotkey|exit hotkey|hotkey/retry hotkey|coordinates/reload hotkey|gui pos|transparent|"
+
+sectionList := " ***** Make a Selection ***** "
+
+Loop, Parse, allContents, `n
+{
 		currentSection := A_LoopField
 		
 		if !InStr(excludedSections, "|" currentSection "|")
@@ -282,6 +286,10 @@ GoSub, CloseInfo
 Return
 
 Config:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
+
 Gui 1: Hide
 Gui 4: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 4: Font, s11 Bold
@@ -606,6 +614,10 @@ IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 
 Gui 1: hide
 Gui 3: hide	
