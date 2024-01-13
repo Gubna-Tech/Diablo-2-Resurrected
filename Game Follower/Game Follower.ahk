@@ -635,8 +635,15 @@ if (info=3){
 return
 
 discord:
+EnableHotkey()
 Gui 20: destroy
 Run, https://discord.gg/2zRRJbdYff
+if (info=1){		
+	gui 1: show
+}
+if (info=3){
+	gui 3: show
+}			
 return
 
 !F4::
