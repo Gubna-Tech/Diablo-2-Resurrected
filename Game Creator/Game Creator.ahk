@@ -219,6 +219,10 @@ ConfigError(){
 return
 
 Coordinates:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
+
 Gui 1: Hide
 Gui 2: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 2: Font, s11 Bold
@@ -354,6 +358,10 @@ GoSub, CloseInfo
 Return
 
 Config:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
+
 Gui 1: Hide
 Gui 4: +LastFound +OwnDialogs +AlwaysOnTop
 Gui 4: Font, s11 Bold
@@ -1324,6 +1332,10 @@ IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey
 IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
 IniRead, hkty, Config.ini, Thank You Message, hotkey
 IniRead, hklg, Config.ini, Last Game Message, hotkey
+
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 
 Gui 1: hide
 Gui 3: hide	
