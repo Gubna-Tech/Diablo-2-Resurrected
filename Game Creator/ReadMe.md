@@ -57,5 +57,3 @@ Coordinates and Hotkeys can be set through/using the GUI once the script has bee
 This project is a continuation and spiritual successor to the following project:
 
 [Original Project - AHK Game Creation Assist Tool](https://www.unknowncheats.me/forum/diablo-series/479584-ahk-game-creation-assist-tool.html)
-
-**Note:** This project will not receive regular updates as it is already considered an updated version of the original Game Creation Tool.
