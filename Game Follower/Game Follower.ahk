@@ -14,12 +14,16 @@ IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
 IniRead, value, Config.ini, Transparent, value
 
 Hotkey %hk1%, Follow
 Hotkey %hk2%, Coordinates
 Hotkey %hk3%, Config
 Hotkey %hk4%, Exit
+Hotkey %hkcta%, CTA
 
 FirstRun=0
 RunCount=0
@@ -608,12 +612,125 @@ if firstrun=0
 }
 return
 
+CTA:
+WinActivate, Diablo II: Resurrected
+
+IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
+IniRead, warntime, Config.ini, Call to Arms Buff Hotkey, warning timer
+WarningTime := Floor(warntime / 1000)
+TimerTime := time - warntime
+SetTimer, CTAWarn, %TimerTime%
+SetTimer, ctatt, %time%
+
+Gui 15: hide
+Gui 7: hide
+Gui 10: destroy
+
+Gui 6: +AlwaysOnTop +OwnDialogs
+Gui 6: Color, Green
+Gui 6: Font, cWhite
+Gui 6: Font, s16 bold
+Gui 6: Add, Text,vMyText center, Casting Call to Arms
+Gui 6: -caption
+Gui 6: Show, NoActivate xcenter y5
+
+WinActivate, Diablo II: Resurrected
+
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey    
+
+WinGetPos, WinX, WinY, WinWidth, WinHeight, Diablo II: Resurrected
+MouseGetPos, curX, curY
+
+MiddleX := WinX + (WinWidth // 2)
+MiddleY := WinY + (WinHeight // 2)
+
+Sleep 50
+Send {w down}
+Sleep 25
+Send {w up}
+Sleep 150
+
+Send %hkbc%
+Sleep 25
+MouseMove %MiddleX%, %MiddleY%
+Sleep 50
+Send {rbutton down}
+Sleep 1250
+Send {rbutton up}
+
+Send %hkbo%
+Sleep 25
+MouseMove %MiddleX%, %MiddleY%
+Sleep 50
+Send {rbutton down}
+Sleep 1250
+Send {rbutton up}
+
+Sleep 450
+Send {w down}
+Sleep 25
+Send {w up}
+MouseMove %curX%, %curY%
+
+Gui 6: destroy
+return
+
+		ctatt:
+		settimer ctatt, off
+		gui 7: hide
+		Loop 5
+		{
+			WinActivate, Diablo II: Resurrected
+			Gui 10: +AlwaysOnTop +OwnDialogs
+			Gui 10: Color, Red
+			Gui 10: Font, cWhite
+			Gui 10: Font, s16 bold
+			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+			Gui 10: -caption
+			Gui 10: Show, NoActivate xcenter y5
+			Sleep, 500
+			Gui 10: destroy
+			WinActivate, Diablo II: Resurrected
+
+			Gui 10: +AlwaysOnTop +OwnDialogs
+			Gui 10: Color, white
+			Gui 10: Font, cRed
+			Gui 10: Font, s16 bold
+			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+			Gui 10:-caption
+			Gui 10: Show, NoActivate xcenter y5
+			Sleep, 500
+			Gui 10: destroy
+			WinActivate, Diablo II: Resurrected
+			}
+		return
+		
+	ctawarn:
+		settimer ctawarn, off
+		gui 7: hide
+			WinActivate, Diablo II: Resurrected
+			Gui 15: +AlwaysOnTop +OwnDialogs
+			Gui 15: Color, Teal
+			Gui 15: Font, cWhite
+			Gui 15: Font, s16 bold
+			Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
+			Gui 15: -caption
+			Gui 15: Show, NoActivate xcenter y5
+			Sleep, 3000
+			Gui 15: destroy
+			WinActivate, Diablo II: Resurrected
+return
+
 info:
 DisableHotkey()
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
+IniRead, hkcta, Config.ini, Call to Arms Buff Hotkey, hotkey
+IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey
+IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
 
 WinGetPos, GUIxc, GUIyc,,,,Information
 IniWrite, %GUIxc%, Config.ini, GUI POS, guix
@@ -626,6 +743,11 @@ Gui 20: Font, s11 Bold underline cPurple
 Gui 20: Add, Text, Center w220 x5,[ Script Hotkeys ]
 Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,Start: %hk1%`nCoordinates/Reload: %hk2%`nHotkey: %hk3%`nExit: %hk4%
+Gui 20: Add, Text, center x5 w220,
+Gui 20: Font, Bold underline cMaroon
+Gui 20: Add, Text, Center w220 x5,[Combat Hotkeys]
+Gui 20: Font, Norm
+Gui 20: Add, Text, Center w220 x5,CTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBattle Orders: %hkbo%
 Gui 20: Font, s11 Bold c0x152039
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Add, Text, Center w220 x5,Created by Gubna
