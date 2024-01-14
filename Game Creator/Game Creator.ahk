@@ -229,7 +229,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|last game message|thank you message|"
+excludedSections := "|start hotkey|exit hotkey|hotkey hotkey|coordinates/reload hotkey|gui pos|transparent|TP Up Hotkey|TP Hot Hotkey|TP Safe Hotkey|autoattack hotkey|call to arms buff hotkey|battle orders hotkey|battle commands hotkey|last game message|thank you message|custom message|"
 
 sectionList := " ***** Make a Selection ***** "
 
@@ -429,17 +429,11 @@ IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey Hotkey, hotkey
 IniRead, hk4, Config.ini, Exit Hotkey, hotkey
-IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
-IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
-IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
 
 Hotkey %hk1%, Difficulty
 Hotkey %hk2%, Coordinates
 Hotkey %hk3%, Config
 Hotkey %hk4%, Exit
-Hotkey %hktp1%, Up
-Hotkey %hktp2%, Hot
-Hotkey %hktp3%, Safe
 
 Gui 13: Destroy
 Gui 1: Show
@@ -512,6 +506,7 @@ if firstrun=0
 	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
 	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	IniRead, hkcm, Config.ini, Custom Message, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Normal
@@ -524,6 +519,7 @@ if firstrun=0
 	Hotkey %hktp1%, Up
 	Hotkey %hktp2%, Hot
 	Hotkey %hktp3%, Safe
+	Hotkey, %hkcm%, CustomMessage
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -723,6 +719,7 @@ if firstrun=0
 	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
 	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	IniRead, hkcm, Config.ini, Custom Message, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Nightmare
@@ -735,6 +732,7 @@ if firstrun=0
 	Hotkey %hktp1%, Up
 	Hotkey %hktp2%, Hot
 	Hotkey %hktp3%, Safe
+	Hotkey, %hkcm%, CustomMessage
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -935,6 +933,7 @@ if firstrun=0
 	IniRead, hktp1, Config.ini, TP Up Hotkey, hotkey
 	IniRead, hktp2, Config.ini, TP Hot Hotkey, hotkey
 	IniRead, hktp3, Config.ini, TP Safe Hotkey, hotkey
+	IniRead, hkcm, Config.ini, Custom Message, hotkey
 	IniRead, value, Config.ini, Transparent, value
 	
 	Hotkey %hk1%, Hell
@@ -947,6 +946,7 @@ if firstrun=0
 	Hotkey %hktp1%, Up
 	Hotkey %hktp2%, Hot
 	Hotkey %hktp3%, Safe
+	Hotkey, %hkcm%, CustomMessage
 	
 	inputbox, GN,Game Name,Please enter your desired game/lobby name.`nName should be 11 characters or less.`nThere is no need to enter a game number.,,300,160
 	if (gn = "")
@@ -1155,6 +1155,13 @@ iniread, message, Config.ini, Last Game Message, message
 Send %message%{enter}
 Return
 
+CustomMessage:
+send {enter}
+sleep 250
+IniRead, message, Config.ini, Custom Message, message
+Send %message%{enter}
+Return
+
 AutoAttack:
 toggle	:= !toggle
 if (toggle = 1)
@@ -1332,6 +1339,7 @@ IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey
 IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey
 IniRead, hkty, Config.ini, Thank You Message, hotkey
 IniRead, hklg, Config.ini, Last Game Message, hotkey
+IniRead, hkcm, Config.ini, Custom Message, hotkey
 
 WinGetPos, GUIxc, GUIyc,,,,Information
 IniWrite, %GUIxc%, Config.ini, GUI POS, guix
@@ -1348,7 +1356,7 @@ Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cTeal
 Gui 20: Add, Text, Center w220 x5,[Chat Hotkeys]
 Gui 20: Font, Norm
-Gui 20: Add, Text, Center w220 x5,TP Up: %hktp1%`nTP Hot: %hktp2%`nTP Safe: %hktp3%`nThank You: %hkty%`nLast Game: %hklg%
+Gui 20: Add, Text, Center w220 x5,TP Up: %hktp1%`nTP Hot: %hktp2%`nTP Safe: %hktp3%`nThank You: %hkty%`nLast Game: %hklg%`nCustom Message: %hkcm%
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cMaroon
 Gui 20: Add, Text, Center w220 x5,[Combat Hotkeys]
