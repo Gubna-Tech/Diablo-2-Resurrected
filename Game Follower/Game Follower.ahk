@@ -166,7 +166,7 @@ Gui 2: Font, s11 Bold
 DisableHotkey()
 
 IniRead, allContents, Config.ini
-excludedSections := "|start hotkey|exit hotkey|hotkey/retry hotkey|coordinates/reload hotkey|gui pos|transparent|"
+excludedSections := "|start hotkey|exit hotkey|hotkey/retry hotkey|coordinates/reload hotkey|gui pos|transparent|battle orders hotkey|battle commands hotkey|call to arms buff hotkey|"
 
 sectionList := " ***** Make a Selection ***** "
 
