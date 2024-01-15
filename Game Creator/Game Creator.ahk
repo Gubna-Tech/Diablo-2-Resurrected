@@ -440,18 +440,19 @@ Gui 1: Show
 EnableHotkey()
 return
 
+Exit:
+guiclose:
+3guiclose:
+WinGetPos, GUIxc, GUIyc,,,,Information
+IniWrite, %GUIxc%, Config.ini, GUI POS, guix
+IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
+exitapp
+
 Reload:
 WinGetPos, GUIxc, GUIyc,,,,Information
 IniWrite, %GUIxc%, Config.ini, GUI POS, guix
 IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 reload
-
-Exit:
-guiclose:
-WinGetPos, GUIxc, GUIyc,,,,Information
-IniWrite, %GUIxc%, Config.ini, GUI POS, guix
-IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
-exitapp
 
 Difficulty:
 DisableHotkey()
