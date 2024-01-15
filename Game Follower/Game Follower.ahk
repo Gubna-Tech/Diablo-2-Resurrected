@@ -380,6 +380,7 @@ reload
 
 Exit:
 guiclose:
+3guiclose:
 WinGetPos, GUIxc, GUIyc,,,,Information
 IniWrite, %GUIxc%, Config.ini, GUI POS, guix
 IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
