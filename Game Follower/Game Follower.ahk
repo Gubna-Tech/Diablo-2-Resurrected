@@ -4,8 +4,6 @@ SetBatchLines, -1
 
 DetectHiddenWindows, On
 
-settimer, guicheck
-
 SetNumLockState, On
 
 CloseOtherScript()
@@ -50,10 +48,18 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
 
+OnMessage(0x0047, "WM_WINDOWPOSCHANGED")
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
 	If (A_Gui)
 		PostMessage, 0xA1, 2
+}
+return
+
+WM_WINDOWPOSCHANGED() {
+	If (A_Gui) {
+		checkpos()
+	}
 }
 return
 
@@ -69,14 +75,14 @@ CloseOtherScript()
 }
 
 CheckPOS() {
-	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|"
+	allowedWindows := "|Main Menu|Game Follow|Normal|Nightmare|Hell|difficulty|information|hotkeys|coordinates|"
 	
 	WinGetTitle, activeWindowTitle, A
 	
 	if (InStr(allowedWindows, "|" activeWindowTitle "|") <= 0) {
 		return
 	}
-
+	
 	WinGetPos, GUIx, GUIy, GUIw, GUIh, A
 	xmin := GUIx
 	xmax := GUIw + GUIx
@@ -99,11 +105,7 @@ CheckPOS() {
 		WinMove, A,,, yadj
 	}
 }	
-		
-	guicheck:
-	checkpos()
-	return
-	
+
 	DisableHotkey(disable := true) {
 		IniRead, hk1, Config.ini, Start Hotkey, hotkey
 		IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
