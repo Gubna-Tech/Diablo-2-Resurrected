@@ -4,8 +4,6 @@ SetBatchLines, -1
 
 DetectHiddenWindows, On
 
-settimer, guicheck
-
 SetNumLockState, On
 
 CloseOtherScript()
@@ -46,11 +44,18 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
-
+OnMessage(0x0047, "WM_WINDOWPOSCHANGED")
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
 	If (A_Gui)
 		PostMessage, 0xA1, 2
+}
+return
+
+WM_WINDOWPOSCHANGED() {
+	If (A_Gui) {
+		checkpos()
+	}
 }
 return
 
@@ -96,10 +101,6 @@ CheckPOS() {
 		WinMove, A,,, yadj
 	}
 }
-
-guicheck:
-checkpos()
-return
 
 DisableHotkey(disable := true) {
 	IniRead, hk1, Config.ini, Start Hotkey, hotkey
