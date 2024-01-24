@@ -11,7 +11,7 @@
 </p>
 <p align="center">
   <a href="https://discord.gg/2zRRJbdYff">
-    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/2657316a3911f43619406396e39a40fb6449253c/Assets/D2R%20Discord.png" alt="Download" width="400" height="120">
+    <img src="https://raw.githubusercontent.com/Gubna-Tech/Diablo-2-Resurrected/5eaafe57fbbf41b72aadbb091cb48c6ddf46dcd2/Assets/D2R%20Discord.png" alt="Download" width="400" height="120">
   </a>
 </p>
 
