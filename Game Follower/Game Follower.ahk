@@ -509,7 +509,7 @@ if firstrun=0
 		
 		sleep 1000
 		
-		CoordMode, Mouse, Screen
+		CoordMode, Mouse, Window
 		IniRead, x1, Config.ini, Save & Exit, xmin
 		IniRead, x2, Config.ini, Save & Exit, xmax
 		IniRead, y1, Config.ini, Save & Exit, ymin
@@ -520,7 +520,7 @@ if firstrun=0
 		
 		sleep 2500
 		
-		CoordMode, Mouse, Screen
+		CoordMode, Mouse, Window
 		IniRead, x1, Config.ini, Game Name, xmin
 		IniRead, x2, Config.ini, Game Name, xmax
 		IniRead, y1, Config.ini, Game Name, ymin
@@ -579,7 +579,7 @@ if firstrun=0
 		
 		sleep 1000
 		
-		CoordMode, Mouse, Screen
+		CoordMode, Mouse, Window
 		IniRead, x1, Config.ini, Save & Exit, xmin
 		IniRead, x2, Config.ini, Save & Exit, xmax
 		IniRead, y1, Config.ini, Save & Exit, ymin
@@ -590,7 +590,7 @@ if firstrun=0
 		
 		sleep 2500
 		
-		CoordMode, Mouse, Screen
+		CoordMode, Mouse, Window
 		IniRead, x1, Config.ini, Game Name, xmin
 		IniRead, x2, Config.ini, Game Name, xmax
 		IniRead, y1, Config.ini, Game Name, ymin
@@ -612,7 +612,7 @@ if firstrun=0
 		send %newGameName%{enter}
 		
 		return
-}
+	}
 return
 
 CTA:

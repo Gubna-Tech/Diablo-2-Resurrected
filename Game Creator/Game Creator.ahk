@@ -44,6 +44,7 @@ hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
 SendMessage, 0x80, 0, hIcon
 SendMessage, 0x80, 1, hIcon
+
 OnMessage(0x0047, "WM_WINDOWPOSCHANGED")
 OnMessage(0x0201, "WM_LBUTTONDOWN")
 WM_LBUTTONDOWN() {
@@ -577,7 +578,7 @@ if firstrun=1
 	
 	++firstrun
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Create Game Tab, xmin
 	IniRead, x2, Config.ini, Create Game Tab, xmax
 	IniRead, y1, Config.ini, Create Game Tab, ymin
@@ -588,7 +589,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
@@ -623,7 +624,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Normal, xmin
 	IniRead, x2, Config.ini, Normal, xmax
 	IniRead, y1, Config.ini, Normal, ymin
@@ -662,7 +663,7 @@ if firstrun=2
 	
 	sleep 1000
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Save & Exit, xmin
 	IniRead, x2, Config.ini, Save & Exit, xmax
 	IniRead, y1, Config.ini, Save & Exit, ymin
@@ -673,7 +674,7 @@ if firstrun=2
 	
 	sleep 2500
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
@@ -791,7 +792,7 @@ if firstrun=1
 	
 	++firstrun
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Create Game Tab, xmin
 	IniRead, x2, Config.ini, Create Game Tab, xmax
 	IniRead, y1, Config.ini, Create Game Tab, ymin
@@ -802,7 +803,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
@@ -837,7 +838,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Nightmare, xmin
 	IniRead, x2, Config.ini, Nightmare, xmax
 	IniRead, y1, Config.ini, Nightmare, ymin
@@ -876,7 +877,7 @@ if firstrun=2
 	
 	sleep 1000
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Save & Exit, xmin
 	IniRead, x2, Config.ini, Save & Exit, xmax
 	IniRead, y1, Config.ini, Save & Exit, ymin
@@ -887,7 +888,7 @@ if firstrun=2
 	
 	sleep 2500
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
@@ -1004,7 +1005,7 @@ if firstrun=1
 	
 	++firstrun
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Create Game Tab, xmin
 	IniRead, x2, Config.ini, Create Game Tab, xmax
 	IniRead, y1, Config.ini, Create Game Tab, ymin
@@ -1015,7 +1016,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
@@ -1050,7 +1051,7 @@ if firstrun=1
 	
 	sleep 250
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Hell, xmin
 	IniRead, x2, Config.ini, Hell, xmax
 	IniRead, y1, Config.ini, Hell, ymin
@@ -1089,7 +1090,7 @@ if firstrun=2
 	
 	sleep 1000
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Save & Exit, xmin
 	IniRead, x2, Config.ini, Save & Exit, xmax
 	IniRead, y1, Config.ini, Save & Exit, ymin
@@ -1100,7 +1101,7 @@ if firstrun=2
 	
 	sleep 2500
 	
-	CoordMode, Mouse, Screen
+	CoordMode, Mouse, Window
 	IniRead, x1, Config.ini, Game Name, xmin
 	IniRead, x2, Config.ini, Game Name, xmax
 	IniRead, y1, Config.ini, Game Name, ymin
