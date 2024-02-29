@@ -178,30 +178,30 @@ Loop, Parse, allContents, `n
 		
 		if !InStr(excludedSections, "|" currentSection "|")
 			sectionList .= "|" currentSection
-	}
-	
-	Gui, 2: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged, % sectionList
-	Gui, 2: Add, Button, w230 gClose, Close
-	WinSet, Transparent, %value%
-	Gui, 2: Show, w250 h45 Center, Coordinates
-	Gui 2: -Caption
-	return
-	
-	Close:
-	Gui 2: Destroy
-	Gui 1: Show
-	EnableHotkey()
-	return
-	
-	DropDownChanged:
-	GuiControlGet, selectedSection,, SectionList
-	
-	if (selectedSection != " ***** Make a Selection ***** ")
-		GoSub, ButtonClicked
-	
-	return
-	
-	ButtonClicked:
+}
+
+Gui, 2: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged, % sectionList
+Gui, 2: Add, Button, x52 w150 gClose, Close Coordinates
+WinSet, Transparent, %value%
+Gui, 2: Show, w250 h45 Center, Coordinates
+Gui 2: -Caption
+return
+
+Close:
+Gui 2: Destroy
+Gui 1: Show
+EnableHotkey()
+return
+
+DropDownChanged:
+GuiControlGet, selectedSection,, SectionList
+
+if (selectedSection != " ***** Make a Selection ***** ")
+	GoSub, ButtonClicked
+
+return
+
+ButtonClicked:
 Gui, 2: Hide
 
 WinActivate, Diablo II: Resurrected
@@ -317,7 +317,7 @@ Loop, Parse, allContents, `n
 Gui, 4: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged2, % sectionList
 Gui, 4: Add, Text, w230 vHotkeysText, Hotkeys will be displayed here
 Gui, 4: Add, Hotkey, x100 y60 w75 vChosenHotkey gHotkeyChanged, None
-Gui, 4: Add, Button, x10 y90 w230 gClose2, Close
+Gui, 4: Add, Button, x64 y90 w125 gClose2, Close Hotkeys
 WinSet, Transparent, %value%
 Gui, 4: Show, w250 h100 Center, Hotkeys
 Gui 4: -Caption
