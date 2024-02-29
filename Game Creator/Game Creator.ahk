@@ -384,7 +384,7 @@ Loop, Parse, allContents, `n
 
 Gui, 4: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged2, % sectionList
 Gui, 4: Add, Text, w230 vHotkeysText, Hotkeys will be displayed here
-Gui, 4: Add, Hotkey, x100 y60 w75 vChosenHotkey gHotkeyChanged, None
+Gui, 4: Add, Hotkey, x97 y60 w60 vChosenHotkey gHotkeyChanged Center, ** NONE **
 Gui, 4: Add, Button, x64 y90 w125 gClose2, Close Hotkeys
 WinSet, Transparent, %value%
 Gui, 4: Show, w250 h100 Center, Hotkeys
