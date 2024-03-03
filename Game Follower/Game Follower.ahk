@@ -706,23 +706,23 @@ return
 			Sleep, 500
 			Gui 10: destroy
 			WinActivate, Diablo II: Resurrected
-			}
-		return
-		
-	ctawarn:
-		settimer ctawarn, off
-		gui 7: hide
-			WinActivate, Diablo II: Resurrected
-			Gui 15: +AlwaysOnTop +OwnDialogs
-			Gui 15: Color, Teal
-			Gui 15: Font, cWhite
-			Gui 15: Font, s16 bold
-			Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
-			Gui 15: -caption
-			Gui 15: Show, NoActivate xcenter y5
-			Sleep, 3000
-			Gui 15: destroy
-			WinActivate, Diablo II: Resurrected
+}
+return
+
+ctawarn:
+settimer ctawarn, off
+gui 7: hide
+WinActivate, Diablo II: Resurrected
+Gui 15: +AlwaysOnTop +OwnDialogs
+Gui 15: Color, Teal
+Gui 15: Font, cWhite
+Gui 15: Font, s16 bold
+Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
+Gui 15: -caption
+Gui 15: Show, NoActivate xcenter y5
+Sleep, 3000
+Gui 15: destroy
+WinActivate, Diablo II: Resurrected
 return
 
 info:
@@ -748,12 +748,13 @@ Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,Start: %hk1%`nCoordinates/Reload: %hk2%`nHotkey: %hk3%`nExit: %hk4%
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cMaroon
-Gui 20: Add, Text, Center w220 x5,[Combat Hotkeys]
+Gui 20: Add, Text, Center w220 x5,[ Combat Hotkeys ]
 Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,CTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBattle Orders: %hkbo%
 Gui 20: Font, s11 Bold c0x152039
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Add, Text, Center w220 x5,Created by Gubna
+Gui 20: Add, Button, gInfoConfig w150 x40 center,Script Config
 Gui 20: Add, Button, gDiscord w150 x40 center,Discord
 Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
 Gui 20: -caption
@@ -781,6 +782,11 @@ if (info=1){
 if (info=3){
 	gui 3: show
 }			
+return
+
+InfoConfig:
+EnableHotkey()
+Run %A_ScriptDir%\Config.ini
 return
 
 !F4::

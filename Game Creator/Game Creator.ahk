@@ -1357,17 +1357,18 @@ Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,Start: %hk1%`nCoordinates/Reload: %hk2%`nHotkey: %hk3%`nExit: %hk4%
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cTeal
-Gui 20: Add, Text, Center w220 x5,[Chat Hotkeys]
+Gui 20: Add, Text, Center w220 x5,[ Chat Hotkeys ]
 Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,TP Up: %hktp1%`nTP Hot: %hktp2%`nTP Safe: %hktp3%`nThank You: %hkty%`nLast Game: %hklg%`nCustom Message: %hkcm%
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Font, Bold underline cMaroon
-Gui 20: Add, Text, Center w220 x5,[Combat Hotkeys]
+Gui 20: Add, Text, Center w220 x5,[ Combat Hotkeys ]
 Gui 20: Font, Norm
 Gui 20: Add, Text, Center w220 x5,AutoAttack: %hkauto%`nCTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBattle Orders: %hkbo%
 Gui 20: Font, s11 Bold c0x152039
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Add, Text, Center w220 x5,Created by Gubna
+Gui 20: Add, Button, gInfoConfig w150 x40 center,Script Config
 Gui 20: Add, Button, gDiscord w150 x40 center,Discord
 Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
 Gui 20: -caption
@@ -1395,6 +1396,11 @@ if (info=1){
 if (info=3){
 	gui 3: show
 }			
+return
+
+InfoConfig:
+EnableHotkey()
+Run %A_ScriptDir%\Config.ini
 return
 
 !F4::
