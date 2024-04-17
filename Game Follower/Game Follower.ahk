@@ -8,6 +8,29 @@ SetNumLockState, On
 
 CloseOtherScript()
 
+if !FileExist("Config.ini")
+{
+	Gui Error: +AlwaysOnTop +OwnDialogs
+	Gui Error: Font, S13 bold underline cRed
+	Gui Error: Add, Text, Center w220 x5,ERROR
+	Gui Error: Add, Text, center x5 w220,
+	Gui Error: Font, s12 norm bold
+	Gui Error: Add, Text, Center w220 x5, Config.ini not found
+	Gui Error: Add, Text, center x5 w220,
+	Gui Error: Font, cBlack
+	Gui Error: Add, Text, Center w220 x5, Please ensure that you have all the original files from:
+	Gui Error: Font, underline s12
+	Gui Error: Add, Text, cBlue gGitLink center w220 x5, Gubna-Tech Github
+	Gui Error: Font, s11 norm Bold c0x152039
+	Gui Error: Add, Text, center x5 w220,
+	Gui Error: Add, Text, Center w220 x5,Created by Gubna
+	Gui Error: Add, Button, gDiscordError w150 x40 center,Discord
+	Gui Error: add, button, gCloseError w150 x40 center,Close Error
+	Gui Error: -caption
+	Gui Error: Show, center w230, Config Error
+	return
+}
+
 IniRead, hk1, Config.ini, Start Hotkey, hotkey
 IniRead, hk2, Config.ini, Coordinates/Reload Hotkey, hotkey
 IniRead, hk3, Config.ini, Hotkey/Retry Hotkey, hotkey
@@ -788,6 +811,17 @@ InfoConfig:
 EnableHotkey()
 Run %A_ScriptDir%\Config.ini
 return
+
+GitLink:
+run, https://github.com/Gubna-Tech/Diablo-2-Resurrected
+Exitapp
+
+DiscordError:
+Run, https://discord.gg/2zRRJbdYff
+Exitapp
+
+CloseError:	
+ExitApp
 
 !F4::
 MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
