@@ -55,7 +55,10 @@ Gui 1: Add, Button, x5 y42 w100 gCoordinates, Coordinates
 Gui 1: Add, Button, x115 y42 w100 gConfig, Hotkeys
 Gui 1: Add, Button, x5 y72 w100 gInfo, Information
 Gui 1: Add, Button, x115 y72 w100 gExit, Exit
-Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
+if FileExist("D2R.ico")
+{
+	Menu, Tray, Icon, %A_ScriptDir%\D2R.ico
+}
 WinSet, Transparent, %value%
 Gui 1: Show, w225 h110, Main Menu
 
