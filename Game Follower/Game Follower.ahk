@@ -570,7 +570,10 @@ if firstrun=0
 }
 	if firstrun=1
 	{
-		WinActivate, Diablo II: Resurrected
+		IfWinNotActive, Diablo II: Resurrected
+		{
+			WinActivate, Diablo II: Resurrected
+		}
 		
 		++firstrun
 		
@@ -625,7 +628,10 @@ if firstrun=0
 	}
 	if firstrun=2
 	{
-		WinActivate, Diablo II: Resurrected
+		IfWinNotActive, Diablo II: Resurrected
+		{
+			WinActivate, Diablo II: Resurrected
+		}
 		
 		RegExMatch(newgamename, "i)(.*?[^0-9]?)(\d+)$", match)
 		
@@ -688,11 +694,14 @@ if firstrun=0
 		send %newGameName%{enter}
 		
 		return
-	}
+}
 return
 
 CTA:
-WinActivate, Diablo II: Resurrected
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
 IniRead, warntime, Config.ini, Call to Arms Buff Hotkey, warning timer
@@ -755,40 +764,52 @@ MouseMove %curX%, %curY%
 Gui 6: destroy
 return
 
-		ctatt:
-		settimer ctatt, off
-		gui 7: hide
-		Loop 5
-		{
-			WinActivate, Diablo II: Resurrected
-			Gui 10: +AlwaysOnTop +OwnDialogs
-			Gui 10: Color, Red
-			Gui 10: Font, cWhite
-			Gui 10: Font, s16 bold
-			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
-			Gui 10: -caption
-			Gui 10: Show, NoActivate xcenter y5
-			Sleep, 500
-			Gui 10: destroy
-			WinActivate, Diablo II: Resurrected
-
-			Gui 10: +AlwaysOnTop +OwnDialogs
-			Gui 10: Color, white
-			Gui 10: Font, cRed
-			Gui 10: Font, s16 bold
-			Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
-			Gui 10:-caption
-			Gui 10: Show, NoActivate xcenter y5
-			Sleep, 500
-			Gui 10: destroy
-			WinActivate, Diablo II: Resurrected
+ctatt:
+settimer ctatt, off
+gui 7: hide
+Loop 5
+{
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
+	Gui 10: +AlwaysOnTop +OwnDialogs
+	Gui 10: Color, Red
+	Gui 10: Font, cWhite
+	Gui 10: Font, s16 bold
+	Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+	Gui 10: -caption
+	Gui 10: Show, NoActivate xcenter y5
+	Sleep, 500
+	Gui 10: destroy
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
+	
+	Gui 10: +AlwaysOnTop +OwnDialogs
+	Gui 10: Color, white
+	Gui 10: Font, cRed
+	Gui 10: Font, s16 bold
+	Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+	Gui 10:-caption
+	Gui 10: Show, NoActivate xcenter y5
+	Sleep, 500
+	Gui 10: destroy
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 }
 return
 
 ctawarn:
 settimer ctawarn, off
 gui 7: hide
-WinActivate, Diablo II: Resurrected
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 Gui 15: +AlwaysOnTop +OwnDialogs
 Gui 15: Color, Teal
 Gui 15: Font, cWhite

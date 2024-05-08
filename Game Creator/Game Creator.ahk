@@ -649,7 +649,10 @@ if firstrun=0
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	info=3
 	
@@ -657,7 +660,10 @@ if firstrun=0
 }
 if firstrun=1
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer, ctatt, Off
@@ -731,7 +737,10 @@ if firstrun=1
 }
 if firstrun=2
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer ctatt, off
@@ -863,7 +872,10 @@ if firstrun=0
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	info=3
 	
@@ -871,7 +883,10 @@ if firstrun=0
 }
 if firstrun=1
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer, ctatt, Off
@@ -945,7 +960,10 @@ if firstrun=1
 }
 if firstrun=2
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer ctatt, off
@@ -1076,7 +1094,10 @@ if firstrun=0
 	
 	GuiControl 3: , GameName,%gn% %gamenumber%
 	
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	info=3
 	
@@ -1084,7 +1105,10 @@ if firstrun=0
 }
 if firstrun=1
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer, ctatt, Off
@@ -1158,7 +1182,10 @@ if firstrun=1
 }
 if firstrun=2
 {
-	WinActivate, Diablo II: Resurrected
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}
 	
 	settimer ctawarn, off
 	settimer ctatt, off
@@ -1285,7 +1312,10 @@ else
 return
 
 CTA:
-WinActivate, Diablo II: Resurrected
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 
 IniRead, time, Config.ini, Call to Arms Buff Hotkey, timer
 IniRead, warntime, Config.ini, Call to Arms Buff Hotkey, warning timer
@@ -1306,7 +1336,10 @@ Gui 6: Add, Text,vMyText center, Casting Call to Arms
 Gui 6: -caption
 Gui 6: Show, NoActivate xcenter y5
 
-WinActivate, Diablo II: Resurrected
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 
 IniRead, hkbc, Config.ini, Battle Commands Hotkey, hotkey    
 IniRead, hkbo, Config.ini, Battle Orders Hotkey, hotkey    
@@ -1359,7 +1392,10 @@ return
 		gui 7: hide
 		Loop 5
 		{
-			WinActivate, Diablo II: Resurrected
+			IfWinNotActive, Diablo II: Resurrected
+			{
+				WinActivate, Diablo II: Resurrected
+			}
 			Gui 10: +AlwaysOnTop +OwnDialogs
 			Gui 10: Color, Red
 			Gui 10: Font, cWhite
@@ -1369,7 +1405,10 @@ return
 			Gui 10: Show, NoActivate xcenter y5
 			Sleep, 500
 			Gui 10: destroy
-			WinActivate, Diablo II: Resurrected
+			IfWinNotActive, Diablo II: Resurrected
+			{
+				WinActivate, Diablo II: Resurrected
+			}
 			if (toggle = 1)
 			{
 				SendInput, {RButton Down}
@@ -1383,7 +1422,10 @@ return
 			Gui 10: Show, NoActivate xcenter y5
 			Sleep, 500
 			Gui 10: destroy
-			WinActivate, Diablo II: Resurrected
+			IfWinNotActive, Diablo II: Resurrected
+			{
+				WinActivate, Diablo II: Resurrected
+			}
 			if (toggle = 1)
 			{
 				SendInput, {RButton Down}
@@ -1399,19 +1441,22 @@ return
 	ctawarn:
 		settimer ctawarn, off
 		gui 7: hide
-			WinActivate, Diablo II: Resurrected
-			Gui 15: +AlwaysOnTop +OwnDialogs
-			Gui 15: Color, Teal
-			Gui 15: Font, cWhite
-			Gui 15: Font, s16 bold
-			Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
-			Gui 15: -caption
-			Gui 15: Show, NoActivate xcenter y5
-			Sleep, 3000
-			Gui 15: destroy
-			WinActivate, Diablo II: Resurrected
-		if (toggle = 1)
-		{
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
+Gui 15: +AlwaysOnTop +OwnDialogs
+Gui 15: Color, Teal
+Gui 15: Font, cWhite
+Gui 15: Font, s16 bold
+Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
+Gui 15: -caption
+Gui 15: Show, NoActivate xcenter y5
+Sleep, 3000
+Gui 15: destroy
+WinActivate, Diablo II: Resurrected
+if (toggle = 1)
+{
 			gui 7: show
 			SendInput, {RButton Down}
 }
