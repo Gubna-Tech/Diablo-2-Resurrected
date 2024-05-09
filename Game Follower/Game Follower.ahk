@@ -10,7 +10,7 @@ CloseOtherScript()
 
 if !FileExist("Config.ini")
 {
-	Gui Error: +AlwaysOnTop +OwnDialogs
+	Gui Error: +LastFound +OwnDialogs +AlwaysOnTo
 	Gui Error: Font, S13 bold underline cRed
 	Gui Error: Add, Text, Center w220 x5,ERROR
 	Gui Error: Add, Text, center x5 w220,
@@ -26,6 +26,7 @@ if !FileExist("Config.ini")
 	Gui Error: Add, Text, Center w220 x5,Created by Gubna
 	Gui Error: Add, Button, gDiscordError w150 x40 center,Discord
 	Gui Error: add, button, gCloseError w150 x40 center,Close Error
+	WinSet, ExStyle, ^0x80
 	Gui Error: -caption
 	Gui Error: Show, center w230, Config Error
 	return
@@ -69,14 +70,17 @@ IniRead, x, Config.ini, GUI POS, guix
 IniRead, y, Config.ini, GUI POS, guiy
 WinMove A, ,%X%, %y%
 
-hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
+if FileExist("D2R.ico")
+{
+	hIcon := DllCall("LoadImage", uint, 0, str, "D2R.ico"
    	, uint, 1, int, 0, int, 0, uint, 0x10)
-SendMessage, 0x80, 0, hIcon
-SendMessage, 0x80, 1, hIcon
-
-OnMessage(0x0047, "WM_WINDOWPOSCHANGED")
-OnMessage(0x0201, "WM_LBUTTONDOWN")
-WM_LBUTTONDOWN() {
+	SendMessage, 0x80, 0, hIcon
+	SendMessage, 0x80, 1, hIcon
+}
+	
+	OnMessage(0x0047, "WM_WINDOWPOSCHANGED")
+	OnMessage(0x0201, "WM_LBUTTONDOWN")
+	WM_LBUTTONDOWN() {
 	If (A_Gui)
 		PostMessage, 0xA1, 2
 }
@@ -200,14 +204,15 @@ sectionList := " ***** Make a Selection ***** "
 
 Loop, Parse, allContents, `n
 {
-		currentSection := A_LoopField
-		
-		if !InStr(excludedSections, "|" currentSection "|")
-			sectionList .= "|" currentSection
+    currentSection := A_LoopField
+
+    if !InStr(excludedSections, "|" currentSection "|")
+        sectionList .= "|" currentSection
 }
 
 Gui, 2: Add, DropDownList, w230 vSectionList Choose1 gDropDownChanged, % sectionList
 Gui, 2: Add, Button, x52 w150 gClose, Close Coordinates
+WinSet, ExStyle, ^0x80
 WinSet, Transparent, %value%
 Gui, 2: Show, w250 h45 Center, Coordinates
 Gui 2: -Caption
@@ -242,17 +247,19 @@ ButtonText := selectedSection
 
 SetTimer, CheckClicks, 10
 
-Gui 11u: +AlwaysOnTop +OwnDialogs +Disabled
+Gui 11u: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 Gui 11u: Color, Red
 Gui 11u: Font, cRed
 Gui 11u: Font, s16 bold
 Gui 11u: Add, Text, valertlabel center,----Right-click the item's top-left corner for its coordinates`n----
+WinSet, ExStyle, ^0x80
 Gui 11u: -caption
 Gui 11u: Show, NoActivate xcenter y0, BottomGUI
 
-Gui 11: +AlwaysOnTop +OwnDialogs +Disabled
+Gui 11: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 Gui 11: Font, s16 bold
 Gui 11: Add, Text, vTone center,Right-click the item's top-left corner for its coordinates
+WinSet, ExStyle, ^0x80
 Gui 11: -caption
 Gui 11: Show, NoActivate xcenter y9999, TopGUI
 
@@ -275,22 +282,27 @@ if GetKeyState("RButton", "P")
 		Gui 11: destroy
 		Gui 11u: destroy
 		
-		Gui 12u: +AlwaysOnTop +OwnDialogs +Disabled
+		Gui 12u: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 		Gui 12u: Color, Red
 		Gui 12u: Font, cRed
 		Gui 12u: Font, s16 bold
 		Gui 12u: Add, Text, valertlabel center,----Right-click the item's bottom-right corner for its coordinates`n----
+		WinSet, ExStyle, ^0x80
 		Gui 12u: -caption
 		Gui 12u: Show, NoActivate xcenter y0, BottomGUI
 		
-		Gui 12: +AlwaysOnTop +OwnDialogs +Disabled
+		Gui 12: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 		Gui 12: Font, s16 bold
 		Gui 12: Add, Text, vTtwo center,Right-click the item's bottom-right corner for its coordinates
+		WinSet, ExStyle, ^0x80
 		Gui 12: -caption
 		Gui 12: Show, NoActivate xcenter y9999, TopGUI
 		
 		Gui, TopGUI: +LabelTopGUI
 		WinMove, TopGUI,, , %topPOS%
+		
+		xmin := MouseX
+		ymin := MouseY
 		
 		xmin := MouseX
 		ymin := MouseY
@@ -300,24 +312,29 @@ if GetKeyState("RButton", "P")
 		Gui 12: destroy
 		Gui 12u: destroy
 		
-		Gui 13u: +AlwaysOnTop +OwnDialogs +Disabled
+		Gui 13u: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 		Gui 13u: Color, Green
 		Gui 13u: Font, cGreen
 		Gui 13u: Font, s16 bold
 		Gui 13u: Add, Text, valertlabel center,----Coordinates have been updated in the Config.ini file`n----
+		WinSet, ExStyle, ^0x80
 		Gui 13u: -caption
 		Gui 13u: Show, NoActivate xcenter y0, BottomGUI
 		
-		Gui 13: +AlwaysOnTop +OwnDialogs +Disabled
+		Gui 13: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 		Gui 13: Color, White
 		Gui 13: Font, cGreen
 		Gui 13: Font, s16 bold
 		Gui 13: Add, Text, vTthree center,Coordinates have been updated in the Config.ini file
+		WinSet, ExStyle, ^0x80
 		Gui 13: -caption
 		Gui 13: Show, NoActivate xcenter y9999, TopGUI
 		
 		Gui, TopGUI: +LabelTopGUI
 		WinMove, TopGUI,, , %topPOS%
+		
+		xmin := MouseX
+		ymin := MouseY
 		
 		xmax := MouseX
 		ymax := MouseY
@@ -386,6 +403,7 @@ Gui, 4: Add, Text, w230 vHotkeysText, Hotkeys will be displayed here
 Gui, 4: Add, Hotkey, x97 y60 w60 vChosenHotkey gHotkeyChanged Center, ** NONE **
 Gui, 4: Add, Button, x64 y90 w125 gClose2, Close Hotkeys
 WinSet, Transparent, %value%
+WinSet, ExStyle, ^0x80
 Gui, 4: Show, w250 h100 Center, Hotkeys
 Gui 4: -Caption
 return
@@ -416,19 +434,21 @@ HotkeyChanged:
 IniWrite, %ChosenHotkey%, Config.ini, %selectedSection%, Hotkey
 Gui, 4: Destroy
 
-Gui 13u: +AlwaysOnTop +OwnDialogs +Disabled
+Gui 13u: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 Gui 13u: Color, Green
 Gui 13u: Font, cGreen
 Gui 13u: Font, s16 bold
 Gui 13u: Add, Text, valertlabel center,----Hotkey has been updated in the Config.ini file`n----
+WinSet, ExStyle, ^0x80
 Gui 13u: -caption
 Gui 13u: Show, NoActivate xcenter y0
 
-Gui 13: +AlwaysOnTop +OwnDialogs +Disabled
+Gui 13: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 Gui 13: Color, White
 Gui 13: Font, cGreen
 Gui 13: Font, s16 bold
 Gui 13: Add, Text, vTthree center, Hotkey has been updated in the Config.ini file
+WinSet, ExStyle, ^0x80
 Gui 13: -caption
 Gui 13: Show, NoActivate xcenter y15
 
@@ -714,11 +734,12 @@ Gui 15: hide
 Gui 7: hide
 Gui 10: destroy
 
-Gui 6: +AlwaysOnTop +OwnDialogs
+Gui 6: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 Gui 6: Color, Green
 Gui 6: Font, cWhite
 Gui 6: Font, s16 bold
 Gui 6: Add, Text,vMyText center, Casting Call to Arms
+WinSet, ExStyle, ^0x80
 Gui 6: -caption
 Gui 6: Show, NoActivate xcenter y5
 
@@ -773,11 +794,12 @@ Loop 5
 	{
 		WinActivate, Diablo II: Resurrected
 	}
-	Gui 10: +AlwaysOnTop +OwnDialogs
+	Gui 10: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 	Gui 10: Color, Red
 	Gui 10: Font, cWhite
 	Gui 10: Font, s16 bold
 	Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+	WinSet, ExStyle, ^0x80
 	Gui 10: -caption
 	Gui 10: Show, NoActivate xcenter y5
 	Sleep, 500
@@ -787,11 +809,12 @@ Loop 5
 		WinActivate, Diablo II: Resurrected
 	}
 	
-	Gui 10: +AlwaysOnTop +OwnDialogs
+	Gui 10: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 	Gui 10: Color, white
 	Gui 10: Font, cRed
 	Gui 10: Font, s16 bold
 	Gui 10: Add, Text,vMyText center,Call to Arms has faded...recast now!!
+	WinSet, ExStyle, ^0x80
 	Gui 10:-caption
 	Gui 10: Show, NoActivate xcenter y5
 	Sleep, 500
@@ -810,11 +833,12 @@ IfWinNotActive, Diablo II: Resurrected
 {
 	WinActivate, Diablo II: Resurrected
 }
-Gui 15: +AlwaysOnTop +OwnDialogs
+Gui 15: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 Gui 15: Color, Teal
 Gui 15: Font, cWhite
 Gui 15: Font, s16 bold
 Gui 15: Add, Text,vMyText center,%warningtime% seconds until Call to Arms fades
+WinSet, ExStyle, ^0x80
 Gui 15: -caption
 Gui 15: Show, NoActivate xcenter y5
 Sleep, 3000
@@ -838,7 +862,7 @@ IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
 
 Gui 1: hide
 Gui 3: hide	
-Gui 20: +AlwaysOnTop +OwnDialogs
+Gui 20: +AlwaysOnTop +OwnDialogs +LastFound
 Gui 20: Font, s11 Bold underline cPurple
 Gui 20: Add, Text, Center w220 x5,[ Script Hotkeys ]
 Gui 20: Font, Norm
@@ -854,6 +878,7 @@ Gui 20: Add, Text, Center w220 x5,Created by Gubna
 Gui 20: Add, Button, gInfoConfig w150 x40 center,Script Config
 Gui 20: Add, Button, gDiscord w150 x40 center,Discord
 Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
+WinSet, ExStyle, ^0x80
 Gui 20: -caption
 Gui 20: Show, center w230, Information
 return
