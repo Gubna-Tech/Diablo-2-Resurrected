@@ -441,7 +441,7 @@ Gui 13u: Font, s16 bold
 Gui 13u: Add, Text, valertlabel center,----Hotkey has been updated in the Config.ini file`n----
 WinSet, ExStyle, ^0x80
 Gui 13u: -caption
-Gui 13u: Show, NoActivate xcenter y0
+Gui 13u: Show, NoActivate xcenter y0, BottomGUI
 
 Gui 13: +LastFound +AlwaysOnTop +OwnDialogs +Disabled
 Gui 13: Color, White
