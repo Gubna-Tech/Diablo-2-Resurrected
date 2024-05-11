@@ -450,7 +450,15 @@ Gui 13: Font, s16 bold
 Gui 13: Add, Text, vTthree center, Hotkey has been updated in the Config.ini file
 WinSet, ExStyle, ^0x80
 Gui 13: -caption
-Gui 13: Show, NoActivate xcenter y15
+Gui 13: Show, NoActivate xcenter y9999, TopGUI
+
+wingetpos,,,,bottomH, BottomGUI
+wingetpos,,,,topH, TopGUI
+
+topPOS := (bottomH - topH) / 2
+
+Gui, TopGUI: +LabelTopGUI
+WinMove, TopGUI,, , %topPOS%
 
 Sleep 1500
 
