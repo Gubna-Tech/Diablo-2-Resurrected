@@ -303,9 +303,6 @@ if GetKeyState("RButton", "P")
 		
 		xmin := MouseX
 		ymin := MouseY
-		
-		xmin := MouseX
-		ymin := MouseY
 	}
 	else if (ClickCount = 2)
 	{
@@ -332,9 +329,6 @@ if GetKeyState("RButton", "P")
 		
 		Gui, TopGUI: +LabelTopGUI
 		WinMove, TopGUI,, , %topPOS%
-		
-		xmin := MouseX
-		ymin := MouseY
 		
 		xmax := MouseX
 		ymax := MouseY
