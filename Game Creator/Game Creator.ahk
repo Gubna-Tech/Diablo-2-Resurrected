@@ -1251,24 +1251,40 @@ if firstrun=2
 return
 
 Up:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 Send TP is Up{enter}
 Return
 
 Hot:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 Send TP is HOT{enter}
 Return
 
 Safe:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 Send TP is Safe{enter}
 Return
 
 ThankYou:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 iniread, message, Config.ini, Thank You Message, message
@@ -1276,6 +1292,10 @@ Send %message%{enter}
 Return
 
 LastGame:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 iniread, message, Config.ini, Last Game Message, message
@@ -1283,6 +1303,10 @@ Send %message%{enter}
 Return
 
 CustomMessage:
+IfWinNotActive, Diablo II: Resurrected
+{
+	WinActivate, Diablo II: Resurrected
+}
 send {enter}
 sleep 250
 IniRead, message, Config.ini, Custom Message, message
@@ -1293,6 +1317,10 @@ AutoAttack:
 toggle	:= !toggle
 if (toggle = 1)
 {	
+	IfWinNotActive, Diablo II: Resurrected
+	{
+		WinActivate, Diablo II: Resurrected
+	}	
 	Gui 7: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 	Gui 7: Color, Green
 	Gui 7: Font, cWhite
@@ -1453,10 +1481,12 @@ return
 	ctawarn:
 		settimer ctawarn, off
 		gui 7: hide
+		
 IfWinNotActive, Diablo II: Resurrected
 {
 	WinActivate, Diablo II: Resurrected
 }
+
 Gui 15: +AlwaysOnTop +OwnDialogs +LastFound +Disabled
 Gui 15: Color, Teal
 Gui 15: Font, cWhite
@@ -1535,7 +1565,7 @@ if (info=3){
 }			
 return
 
-discord:
+Discord:
 EnableHotkey()
 Gui 20: destroy
 Run, https://discord.gg/2zRRJbdYff
