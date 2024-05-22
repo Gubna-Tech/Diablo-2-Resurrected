@@ -7,6 +7,7 @@ SetNumLockState, On
 CloseOtherScript()
 
 if (InStr(A_ScriptDir, ".zip") > 0) {
+	Menu, Tray, NoIcon
 	Gui Error: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui Error: Font, S13 bold underline cRed
 	Gui Error: Add, Text, Center w220 x5,ERROR
@@ -31,6 +32,7 @@ if (InStr(A_ScriptDir, ".zip") > 0) {
 
 if !FileExist("Config.ini")
 {
+	Menu, Tray, NoIcon
 	Gui Error: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui Error: Font, S13 bold underline cRed
 	Gui Error: Add, Text, Center w220 x5,ERROR
