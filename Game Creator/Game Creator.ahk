@@ -583,7 +583,7 @@ IfWinNotExist Battle.net
 	Gui GNF: Add, Text, Center w220 x5,ERROR
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Font, s12 norm bold
-	Gui GNF: Add, Text, Center w220 x5, Battle.net not open
+	Gui GNF: Add, Text, Center w220 x5, Battle.net Not Found
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Font, cBlack
 	Gui GNF: Add, Text, Center w220 x5, Battle.net was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo II: Resurrected is open.`n`n`nIf Battle.net is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`Battle.net will be auto-launched upon closing this error message.
@@ -606,7 +606,7 @@ IfWinNotExist Diablo II: Resurrected
 	Gui GNF: Add, Text, Center w220 x5,ERROR
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Font, s12 norm bold
-	Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected not found
+	Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected Not Found
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Font, cBlack
 	Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo 2 Resurrected is open.`n`n`nIf Diablo II: Resurrected is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`nDiablo II: Resurrected will be auto-launched upon closing this error message.
