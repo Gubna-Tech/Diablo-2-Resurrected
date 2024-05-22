@@ -31,7 +31,7 @@ if (InStr(A_ScriptDir, ".zip") > 0) {
 
 if !FileExist("Config.ini")
 {
-	Gui Error: +LastFound +OwnDialogs +AlwaysOnTo
+	Gui Error: +LastFound +OwnDialogs +AlwaysOnTop
 	Gui Error: Font, S13 bold underline cRed
 	Gui Error: Add, Text, Center w220 x5,ERROR
 	Gui Error: Add, Text, center x5 w220,
@@ -501,7 +501,6 @@ reload
 
 Exit:
 guiclose:
-3guiclose:
 WinGetPos, GUIxc, GUIyc,,,,Information
 IniWrite, %GUIxc%, Config.ini, GUI POS, guix
 IniWrite, %GUIyc%, Config.ini, GUI POS, guiy
@@ -530,6 +529,53 @@ return
 Follow:
 if firstrun=0
 {		
+	Difficulty:
+	IfWinNotExist Battle.net
+	{
+		Gui 1: Hide
+		Gui GNF: +LastFound +OwnDialogs +AlwaysOnTop
+		Gui GNF: Font, S13 bold underline cRed
+		Gui GNF: Add, Text, Center w220 x5,ERROR
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, s12 norm bold
+		Gui GNF: Add, Text, Center w220 x5, Battle.net not open
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, cBlack
+		Gui GNF: Add, Text, Center w220 x5, Battle.net was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo II: Resurrected is open.`n`n`nIf Battle.net is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`Battle.net will be auto-launched upon closing this error message.
+		Gui GNF: Font, s11 norm Bold c0x152039
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Add, Text, Center w220 x5,Created by Gubna
+		Gui GNF: Add, Button, gDiscordError w150 x40 center,Discord
+		Gui GNF: add, button, gCloseBNet w150 x40 center,Close Error
+		WinSet, ExStyle, ^0x80
+		Gui GNF: -caption
+		Gui GNF: Show, center w230, Game Not Found
+		return
+	}
+	
+	IfWinNotExist Diablo II: Resurrected
+	{
+		Gui 1: Hide
+		Gui GNF: +LastFound +OwnDialogs +AlwaysOnTop
+		Gui GNF: Font, S13 bold underline cRed
+		Gui GNF: Add, Text, Center w220 x5,ERROR
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, s12 norm bold
+		Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected not found
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, cBlack
+		Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo 2 Resurrected is open.`n`n`nIf Diablo II: Resurrected is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`nDiablo II: Resurrected will be auto-launched upon closing this error message.
+		Gui GNF: Font, s11 norm Bold c0x152039
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Add, Text, Center w220 x5,Created by Gubna
+		Gui GNF: Add, Button, gDiscordError w150 x40 center,Discord
+		Gui GNF: add, button, gCloseGNF w150 x40 center,Close Error
+		WinSet, ExStyle, ^0x80
+		Gui GNF: -caption
+		Gui GNF: Show, center w230, Game Not Found
+		return
+	}
+	
 	Gui 1: Destroy
 	Gui 2: Destroy
 	
@@ -944,6 +990,18 @@ Exitapp
 
 CloseError:	
 ExitApp
+
+CloseBNet:
+run "C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"
+GUI GNF: Destroy
+Gui 1: Show
+return
+
+CloseGNF:
+run "C:\Program Files (x86)\Battle.net\Battle.net.exe" --exec="launch OSI"
+GUI GNF: Destroy
+Gui 1: Show
+return
 
 !F4::
 MsgBox, 36,Exit D2R?, Do you want to close Diablo II: Resurrected
