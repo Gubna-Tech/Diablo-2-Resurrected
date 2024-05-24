@@ -17,9 +17,9 @@ if (InStr(A_ScriptDir, ".zip") > 0) {
 	Gui Error: Add, Text, center x5 w220,
 	Gui Error: Font, cBlack
 	Gui Error: Add, Text, Center w220 x5, Please extract all files from the zipped (.zip) folder:
-	Gui Error: Font, underline s12
-	Gui Error: Add, Text, cGreen center w220 x5, Diablo-2-Resurrected-main
-	Gui Error: Font, s11 norm Bold c0x152039
+	Gui Error: Font, underline s11
+	Gui Error: Add, Text, cGreen center w220 x5, Diablo-2-Resurrected-main.zip
+	Gui Error: Font, norm Bold c0x152039
 	Gui Error: Add, Text, center x5 w220,
 	Gui Error: Add, Text, Center w220 x5,Created by Gubna
 	Gui Error: Add, Button, gDiscordError w150 x40 center,Discord
@@ -296,6 +296,10 @@ WinMove, TopGUI,, , %topPOS%
 return
 
 CheckClicks:
+if GetKeyState("Esc", "P")
+{
+	Reload
+}
 if GetKeyState("RButton", "P")
 {	
 	MouseGetPos, MouseX, MouseY
