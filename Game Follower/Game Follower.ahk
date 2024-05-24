@@ -447,6 +447,10 @@ if (selectedSection != " ***** Make a Selection ***** ") {
 return
 
 ButtonClicked2:
+if GetKeyState("Esc", "P")
+{
+	Reload
+}
 GuiControl,, HotkeysText, Enter new hotkey
 GuiControl, Focus, ChosenHotkey
 return
