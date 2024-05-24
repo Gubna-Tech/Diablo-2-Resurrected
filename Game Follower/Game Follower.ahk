@@ -950,6 +950,9 @@ Gui 20: Add, Text, Center w220 x5,CTA Buff: %hkcta%`nBattle Commands: %hkbc%`nBa
 Gui 20: Font, s11 Bold c0x152039
 Gui 20: Add, Text, center x5 w220,
 Gui 20: Add, Text, Center w220 x5,Created by Gubna
+Gui 20: Font, cBlue underline
+Gui 20: Add, Text, Center gMIT w220 x5,MIT License
+Gui 20: Font, cBlack norm bold
 Gui 20: Add, Button, gInfoConfig w150 x40 center,Script Config
 Gui 20: Add, Button, gDiscord w150 x40 center,Discord
 Gui 20: add, button, gCloseInfo w150 x40 center,Close Information
@@ -1020,4 +1023,8 @@ IfMsgBox Yes
     {
         return
 }
+return
+
+MIT:
+run https://github.com/Gubna-Tech/Diablo-2-Resurrected/blob/main/LICENSE
 return
