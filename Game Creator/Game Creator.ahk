@@ -596,7 +596,10 @@ IfWinNotExist Battle.net
 	Gui GNF: Add, Text, Center w220 x5, Battle.net Not Found
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Font, cBlack
-	Gui GNF: Add, Text, Center w220 x5, Battle.net was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo II: Resurrected is open.`n`n`nIf Battle.net is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`Battle.net will be auto-launched upon closing this error message.
+	Gui GNF: Add, Text, Center w220 x5, Battle.net was not found to be running.`n`n`nBattle.net will attempt to be auto-launched upon closing this error message.
+	Gui GNF: Add, Text, center x5 w220,
+	Gui GNF: Font, norm italic s10 c0x152039	
+	Gui GNF: Add, Text, Center w220 x5,If Battle.net is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.
 	Gui GNF: Font, s11 norm Bold c0x152039
 	Gui GNF: Add, Text, center x5 w220,
 	Gui GNF: Add, Text, Center w220 x5,Created by Gubna
@@ -608,28 +611,31 @@ IfWinNotExist Battle.net
 	return
 }
 
-IfWinNotExist Diablo II: Resurrected
-{
-	Gui 1: Hide
-	Gui GNF: +LastFound +OwnDialogs +AlwaysOnTop
-	Gui GNF: Font, S13 bold underline cRed
-	Gui GNF: Add, Text, Center w220 x5,ERROR
-	Gui GNF: Add, Text, center x5 w220,
-	Gui GNF: Font, s12 norm bold
-	Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected Not Found
-	Gui GNF: Add, Text, center x5 w220,
-	Gui GNF: Font, cBlack
-	Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected was not found to be running. Please try to start the script again once Battle.net has been logged into and Diablo 2 Resurrected is open.`n`n`nIf Diablo II: Resurrected is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.`n`n`nDiablo II: Resurrected will be auto-launched upon closing this error message.
-	Gui GNF: Font, s11 norm Bold c0x152039
-	Gui GNF: Add, Text, center x5 w220,
-	Gui GNF: Add, Text, Center w220 x5,Created by Gubna
-	Gui GNF: Add, Button, gDiscordError w150 x40 center,Discord
-	Gui GNF: add, button, gCloseGNF w150 x40 center,Close Error
-	WinSet, ExStyle, ^0x80
-	Gui GNF: -caption
-	Gui GNF: Show, center w230, Game Not Found
-	return
-}
+	IfWinNotExist Diablo II: Resurrected
+	{
+		Gui 1: Hide
+		Gui GNF: +LastFound +OwnDialogs +AlwaysOnTop
+		Gui GNF: Font, S13 bold underline cRed
+		Gui GNF: Add, Text, Center w220 x5,ERROR
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, s12 norm bold
+		Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected Not Found
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, cBlack
+		Gui GNF: Add, Text, Center w220 x5, Diablo II: Resurrected was not found to be running.`n`n`nDiablo II: Resurrected will attempt to be auto-launched upon closing this error message.
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Font, norm italic s10 c0x152039	
+		Gui GNF: Add, Text, Center w220 x5,If Diablo II: Resurrected is open and you receive this message, please use the Discord button below to reach out to Gubna for assistance.
+		Gui GNF: Font, s11 norm Bold c0x152039
+		Gui GNF: Add, Text, center x5 w220,
+		Gui GNF: Add, Text, Center w220 x5,Created by Gubna
+		Gui GNF: Add, Button, gDiscordError w150 x40 center,Discord
+		Gui GNF: add, button, gCloseGNF w150 x40 center,Close Error
+		WinSet, ExStyle, ^0x80
+		Gui GNF: -caption
+		Gui GNF: Show, center w230, Game Not Found
+		return
+	}
 
 DisableHotkey()
 hotkey %hk4%, Exit, on
