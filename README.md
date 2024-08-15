@@ -1,3 +1,5 @@
+# This project has reached its end-of-life. Support is still available through the Discord link/button below.
+
 <p align="center">
 <img width="250" height="250" src="https://github.com/Gubna-Tech/Diablo-2-Resurrected/blob/main/Assets/D2R%20Logo.png">
 <a href="https://www.autohotkey.com">
